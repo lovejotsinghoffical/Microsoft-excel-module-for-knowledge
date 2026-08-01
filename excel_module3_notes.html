@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Excel Module 3 - Notes</title>
+<style>
+  :root{
+    --accent:#217346;
+    --accent-light:#eaf6ee;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+    --bg:#ffffff;
+    --code-bg:#f4f6f8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  .layout{display:flex; min-height:100vh;}
+  .sidebar{
+    width:250px;
+    flex-shrink:0;
+    background:#fafafa;
+    border-right:1px solid var(--border);
+    padding:24px 16px;
+    position:fixed;
+    top:0; left:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+  .sidebar h2{
+    font-size:15px;
+    color:var(--accent);
+    margin:0 0 16px 0;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  .sidebar a{
+    display:block;
+    color:var(--text);
+    text-decoration:none;
+    font-size:13.5px;
+    padding:6px 10px;
+    border-radius:6px;
+    margin-bottom:2px;
+  }
+  .sidebar a:hover{ background:var(--accent-light); color:var(--accent); }
+  .content{
+    margin-left:250px;
+    padding:36px 48px;
+    max-width:860px;
+  }
+  h1.page-title{ font-size:28px; margin-bottom:4px; }
+  .subtitle{ color:var(--muted); margin-bottom:32px; font-size:15px; }
+  section.topic{
+    margin-bottom:52px;
+    padding-bottom:16px;
+    border-bottom:2px solid var(--border);
+  }
+  h2.topic-title{
+    font-size:23px;
+    color:var(--accent);
+    border-left:4px solid var(--accent);
+    padding-left:12px;
+    margin-bottom:20px;
+  }
+  h3.step-title{
+    font-size:16.5px;
+    background:var(--accent-light);
+    color:var(--accent);
+    padding:8px 12px;
+    border-radius:6px;
+    margin-top:24px;
+    margin-bottom:10px;
+  }
+  p{margin:8px 0;}
+  ul, ol{margin:8px 0; padding-left:22px;}
+  li{margin-bottom:6px;}
+  .steps-box{
+    background:#f9fafb;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 18px;
+    margin:12px 0;
+  }
+  .steps-box ol{margin:0; padding-left:20px;}
+  .steps-box li{margin-bottom:8px;}
+  .example-box{
+    background:#f9fafb;
+    border-left:4px solid #10b981;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .example-box b{color:#059669;}
+  .mistake-box{
+    background:#fff7f0;
+    border-left:4px solid #f97316;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .mistake-box b{color:#c2410c;}
+  .shortcut{
+    background:var(--code-bg);
+    padding:2px 8px;
+    border-radius:4px;
+    font-family:Consolas, monospace;
+    font-size:13px;
+    border:1px solid var(--border);
+  }
+  .formula{
+    background:#eef2ff;
+    border:1px solid #c7d2fe;
+    color:#4338ca;
+    padding:3px 8px;
+    border-radius:4px;
+    font-family:Consolas, monospace;
+    font-size:14px;
+    display:inline-block;
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    margin:12px 0;
+    font-size:13.8px;
+  }
+  th, td{ border:1px solid var(--border); padding:7px 10px; text-align:left; }
+  th{ background:var(--accent-light); color:var(--accent); }
+  .quick-revision{
+    background:#f9fafb;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 24px;
+  }
+  .quick-revision h2{ color:var(--accent); margin-top:0; }
+  .quick-revision li{margin-bottom:8px;}
+  .dataset-note{
+    background:#eef2ff;
+    border:1px solid #c7d2fe;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-size:14.5px;
+  }
+  .dataset-note b{color:#4338ca;}
+  @media print{
+    .sidebar{display:none;}
+    .content{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <div class="sidebar">
+    <h2>Excel Module 3</h2>
+    <a href="#t17">T17 · Formula Basics</a>
+    <a href="#t18">T18 · Cell References</a>
+    <a href="#t19">T19 · SUM, AutoSum, AVERAGE</a>
+    <a href="#t20">T20 · MIN, MAX, COUNT...</a>
+    <a href="#t21">T21 · ROUND Functions</a>
+    <a href="#t22">T22 · Percentage & GST</a>
+    <a href="#t23">T23 · Practical – Marksheet</a>
+    <a href="#t24">T24 · Test 3</a>
+    <a href="#quickrevision">⚡ Quick Revision</a>
+  </div>
+
+  <div class="content">
+    <h1 class="page-title">MS Excel — Module 3 Notes</h1>
+    <p class="subtitle">Formulas — beginner-friendly notes with step-by-step guidance. Use alongside the practice dataset "Student_Marksheet_Dataset.xlsx".</p>
+
+    <!-- T17 -->
+    <section class="topic" id="t17">
+      <h2 class="topic-title">T17 · Formula Basics (=, +, -, *, /)</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>A formula is an instruction that tells Excel to calculate something. Every formula in Excel <b>must start with an equals sign (=)</b> — this is what tells Excel "this is a calculation, not plain text."</p>
+
+      <h3 class="step-title">🧩 Basic operators</h3>
+      <table>
+        <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
+        <tr><td>+</td><td>Addition</td><td><span class="formula">=A1+A2</span></td></tr>
+        <tr><td>-</td><td>Subtraction</td><td><span class="formula">=A1-A2</span></td></tr>
+        <tr><td>*</td><td>Multiplication</td><td><span class="formula">=A1*A2</span></td></tr>
+        <tr><td>/</td><td>Division</td><td><span class="formula">=A1/A2</span></td></tr>
+        <tr><td>^</td><td>Power (exponent)</td><td><span class="formula">=A1^2</span></td></tr>
+      </table>
+
+      <h3 class="step-title">🛠️ How to write a basic formula</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the cell where you want the result to appear.</li>
+          <li>Type <code>=</code> to start the formula.</li>
+          <li>Click the first cell you want to use (e.g., A2) instead of typing its value directly — Excel inserts the cell reference automatically.</li>
+          <li>Type the operator (e.g., <code>+</code>).</li>
+          <li>Click the second cell (e.g., A3).</li>
+          <li>Press <span class="shortcut">Enter</span> to see the result.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⏰ When to use cell references instead of numbers</h3>
+      <p>Always prefer <span class="formula">=A2+A3</span> over typing <span class="formula">=78+85</span> directly. If the values in A2 or A3 change later, a formula using cell references updates automatically — a formula using typed numbers does not.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Forgetting the <code>=</code> sign — typing <code>A1+A2</code> without it just becomes plain text, not a calculation.</div>
+    </section>
+
+    <!-- T18 -->
+    <section class="topic" id="t18">
+      <h2 class="topic-title">T18 · Cell References (Relative, Absolute & Mixed)</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>Cell references decide what happens to a formula when you copy it to other cells. There are three types:</p>
+      <table>
+        <tr><th>Type</th><th>Written as</th><th>Behavior when copied</th></tr>
+        <tr><td>Relative</td><td><code>A1</code></td><td>Changes automatically based on new position</td></tr>
+        <tr><td>Absolute</td><td><code>$A$1</code></td><td>Never changes — stays locked to A1</td></tr>
+        <tr><td>Mixed</td><td><code>$A1</code> or <code>A$1</code></td><td>Only column OR only row stays locked</td></tr>
+      </table>
+
+      <h3 class="step-title">🛠️ How to create an Absolute Reference</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click into the formula, right after the cell reference you want to lock (e.g., click right after "A1" in <code>=A1*B2</code>).</li>
+          <li>Press <span class="shortcut">F4</span> — Excel automatically adds dollar signs: <code>$A$1</code>.</li>
+          <li>Press F4 again to cycle through Mixed reference options: <code>A$1</code> → <code>$A1</code> → back to <code>A1</code>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🌍 Real-world example</h3>
+      <div class="example-box">
+        <b>GST calculation:</b> If GST rate 18% is fixed in cell <code>B1</code>, and you want to calculate GST for many products in column A, your formula should be <span class="formula">=A2*$B$1</span>. When you copy this formula down to A3, A4, etc., the price reference (A2) changes to A3, A4 — but the GST rate reference stays locked to B1 because of the dollar signs.
+      </div>
+
+      <h3 class="step-title">⏰ When to use each type</h3>
+      <ul>
+        <li><b>Relative</b> — default choice, use when each row needs its own calculation based on its own row's data.</li>
+        <li><b>Absolute</b> — use when one fixed cell (like a tax rate, a fixed bonus, or a conversion rate) is used across all rows.</li>
+        <li><b>Mixed</b> — used in more advanced tables, e.g. multiplication tables where only the row or only the column should stay fixed.</li>
+      </ul>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Forgetting to lock a fixed-value cell (like a tax rate) with $ signs — when the formula is copied down, the reference shifts to a blank cell and the formula breaks or gives 0/error.</div>
+    </section>
+
+    <!-- T19 -->
+    <section class="topic" id="t19">
+      <h2 class="topic-title">T19 · SUM(), AutoSum(), AVERAGE()</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>These are built-in <b>functions</b> — ready-made formulas for common calculations, so you don't have to write out long addition manually.</p>
+
+      <h3 class="step-title">🧩 Function basics</h3>
+      <table>
+        <tr><th>Function</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td>SUM()</td><td>Adds up all values in a range</td><td><span class="formula">=SUM(C2:G2)</span></td></tr>
+        <tr><td>AVERAGE()</td><td>Calculates the mean (average) of a range</td><td><span class="formula">=AVERAGE(C2:G2)</span></td></tr>
+      </table>
+
+      <h3 class="step-title">🛠️ How to use SUM() manually</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the cell where the total should appear.</li>
+          <li>Type <span class="formula">=SUM(</span></li>
+          <li>Select the range of cells to add (e.g., click C2 and drag to G2).</li>
+          <li>Type <code>)</code> to close the bracket.</li>
+          <li>Press Enter.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to use AutoSum (fastest way)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the empty cell right after (or below) the numbers you want to add.</li>
+          <li>Go to <b>Home tab → AutoSum</b> (the Σ symbol), or press <span class="shortcut">Alt + =</span>.</li>
+          <li>Excel automatically guesses the range — check it's correct, adjust by dragging if needed.</li>
+          <li>Press Enter.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to use AVERAGE()</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the destination cell.</li>
+          <li>Type <span class="formula">=AVERAGE(</span> then select the range → close bracket <code>)</code> → press Enter.</li>
+          <li>Shortcut: click the small dropdown arrow next to AutoSum (Σ) → choose Average.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Including the "Total" column itself inside a SUM range by accident — always double-check the selected range doesn't loop back on its own result.</div>
+    </section>
+
+    <!-- T20 -->
+    <section class="topic" id="t20">
+      <h2 class="topic-title">T20 · MIN(), MAX(), COUNT(), COUNTA(), COUNTBLANK()</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>More built-in functions for quickly analyzing a range of data — finding smallest/largest values, or counting cells.</p>
+
+      <h3 class="step-title">🧩 Function reference</h3>
+      <table>
+        <tr><th>Function</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td>MIN()</td><td>Finds the smallest number in a range</td><td><span class="formula">=MIN(C2:C16)</span></td></tr>
+        <tr><td>MAX()</td><td>Finds the largest number in a range</td><td><span class="formula">=MAX(C2:C16)</span></td></tr>
+        <tr><td>COUNT()</td><td>Counts cells containing <b>numbers</b> only</td><td><span class="formula">=COUNT(C2:C16)</span></td></tr>
+        <tr><td>COUNTA()</td><td>Counts <b>all non-empty</b> cells (numbers + text)</td><td><span class="formula">=COUNTA(B2:B16)</span></td></tr>
+        <tr><td>COUNTBLANK()</td><td>Counts <b>empty</b> cells in a range</td><td><span class="formula">=COUNTBLANK(H2:H16)</span></td></tr>
+      </table>
+
+      <h3 class="step-title">🛠️ How to use these functions</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the destination cell.</li>
+          <li>Type <code>=</code> followed by the function name, e.g. <code>MAX(</code></li>
+          <li>Select the range of cells.</li>
+          <li>Close the bracket <code>)</code> and press Enter.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🌍 Real-world example</h3>
+      <div class="example-box">
+        On a marksheet: <span class="formula">=MAX(C2:C16)</span> finds the topper's Maths score, <span class="formula">=MIN(C2:C16)</span> finds the lowest score, <span class="formula">=COUNTBLANK(H2:H16)</span> tells you how many students still don't have a Grade filled in.
+      </div>
+
+      <h3 class="step-title">⏰ When to use COUNT vs COUNTA vs COUNTBLANK</h3>
+      <p>Use <b>COUNT</b> to count how many students have a numeric score entered. Use <b>COUNTA</b> to count how many cells have any entry at all (like names, which are text). Use <b>COUNTBLANK</b> to check how many entries are still missing.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Using COUNT() expecting it to count text cells too — it only counts numeric cells. Use COUNTA() for text or mixed data.</div>
+    </section>
+
+    <!-- T21 -->
+    <section class="topic" id="t21">
+      <h2 class="topic-title">T21 · ROUND(), ROUNDUP(), ROUNDDOWN()</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>These functions control how many decimal places a number is rounded to.</p>
+
+      <h3 class="step-title">🧩 Function reference</h3>
+      <table>
+        <tr><th>Function</th><th>Behavior</th><th>Example</th><th>Result</th></tr>
+        <tr><td>ROUND()</td><td>Rounds normally (0.5 and above rounds up)</td><td><span class="formula">=ROUND(78.456, 1)</span></td><td>78.5</td></tr>
+        <tr><td>ROUNDUP()</td><td>Always rounds up, no matter the decimal</td><td><span class="formula">=ROUNDUP(78.421, 1)</span></td><td>78.5</td></tr>
+        <tr><td>ROUNDDOWN()</td><td>Always rounds down, no matter the decimal</td><td><span class="formula">=ROUNDDOWN(78.489, 1)</span></td><td>78.4</td></tr>
+      </table>
+
+      <h3 class="step-title">🛠️ How to use ROUND()</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the destination cell.</li>
+          <li>Type <span class="formula">=ROUND(</span></li>
+          <li>Click the cell with the number to round (e.g., the Percentage cell).</li>
+          <li>Type a comma <code>,</code> then the number of decimal places you want (e.g., <code>2</code> for 2 decimal places, or <code>0</code> for a whole number).</li>
+          <li>Close the bracket <code>)</code> and press Enter.</li>
+        </ol>
+      </div>
+      <p>ROUNDUP() and ROUNDDOWN() work exactly the same way — just swap the function name.</p>
+
+      <h3 class="step-title">⏰ When to use this</h3>
+      <p>Use ROUND() for displaying clean percentages/averages (e.g., 78.456% → 78.46%). Use ROUNDUP() in situations like billing, where you always want to round in the business's favor (e.g., rounding up total cost). Use ROUNDDOWN() when you must not overstate a number, e.g. rounding down available stock quantity.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Confusing ROUND() with just changing decimal display (Format Cells → decrease decimal). Format Cells only changes how it <i>looks</i>; the actual stored value stays unrounded. ROUND() actually changes the stored value.</div>
+    </section>
+
+    <!-- T22 -->
+    <section class="topic" id="t22">
+      <h2 class="topic-title">T22 · Percentage & GST Calculations</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>Common real-world formulas: calculating a percentage of a number, and calculating GST (Goods and Services Tax) added to a price.</p>
+
+      <h3 class="step-title">🧩 Key formulas</h3>
+      <table>
+        <tr><th>Goal</th><th>Formula</th></tr>
+        <tr><td>Percentage of marks</td><td><span class="formula">=(Total/Max Marks)*100</span></td></tr>
+        <tr><td>GST Amount</td><td><span class="formula">=Price*(GST_Rate/100)</span></td></tr>
+        <tr><td>Final Price (with GST)</td><td><span class="formula">=Price+GST_Amount</span> or <span class="formula">=Price*(1+GST_Rate/100)</span></td></tr>
+      </table>
+
+      <h3 class="step-title">🛠️ How to calculate Percentage (marksheet example)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the "Percentage" cell for a student.</li>
+          <li>Type <span class="formula">=(</span> then click the Total marks cell.</li>
+          <li>Type <span class="formula">/</span> then type the maximum possible total (e.g., <code>500</code> if there are 5 subjects out of 100 each).</li>
+          <li>Close the bracket, then type <span class="formula">*100</span></li>
+          <li>Press Enter. Example: <span class="formula">=(H2/500)*100</span></li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to calculate GST Amount</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the "GST Amount" cell.</li>
+          <li>Type <span class="formula">=</span> then click the Price cell.</li>
+          <li>Type <span class="formula">*</span> then click the GST Rate cell.</li>
+          <li>Type <span class="formula">/100</span> (since GST rate is stored as a plain number like 18, not 0.18).</li>
+          <li>Press Enter. Example: <span class="formula">=B2*C2/100</span></li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to calculate Final Price (with GST)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the "Final Price" cell.</li>
+          <li>Type <span class="formula">=</span> then click the Price cell.</li>
+          <li>Type <span class="formula">+</span> then click the GST Amount cell.</li>
+          <li>Press Enter. Example: <span class="formula">=B2+D2</span></li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⏰ When to use this</h3>
+      <p>Percentage formulas apply to marksheets, discounts, growth rates, and pass ratios. GST formulas apply to any billing/invoice sheet with tax calculation.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Forgetting to divide the GST rate by 100 — typing <span class="formula">=B2*C2</span> when C2 holds "18" gives a hugely wrong number instead of 18% of the price.</div>
+    </section>
+
+    <!-- T23 -->
+    <section class="topic" id="t23">
+      <h2 class="topic-title">T23 · Practical Exercise — Student Marksheet</h2>
+
+      <h3 class="step-title">📌 Goal</h3>
+      <p>Apply everything from T17–T22 on a real marksheet: SUM, AVERAGE, MIN/MAX, ROUND, and Percentage formulas — plus a separate GST practice sheet.</p>
+
+      <div class="dataset-note">
+        <b>Dataset provided:</b> <code>Student_Marksheet_Dataset.xlsx</code> — two sheets:<br>
+        <b>Sheet "Marksheet"</b>: 15 students with marks in Maths, Science, English, Computer, Social Science (out of 100 each). Total, Average, Percentage, and Grade columns are left blank for you to calculate.<br>
+        <b>Sheet "GST Calculation"</b>: 8 products with Price and GST Rate given; GST Amount and Final Price columns left blank.
+      </div>
+
+      <h3 class="step-title">🛠️ Step-by-step exercise instructions</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Open <code>Student_Marksheet_Dataset.xlsx</code> → go to the <b>Marksheet</b> sheet.</li>
+          <li><b>Total column (H):</b> Click H2 → use AutoSum (<span class="shortcut">Alt + =</span>) to sum C2:G2. Drag the Fill Handle down to H16.</li>
+          <li><b>Average column (I):</b> Click I2 → type <span class="formula">=AVERAGE(C2:G2)</span> → Enter. Fill down to I16.</li>
+          <li><b>Percentage column (J):</b> Click J2 → type <span class="formula">=(H2/500)*100</span> → Enter. Fill down to J16.</li>
+          <li><b>Round the Percentage:</b> Wrap it with ROUND: <span class="formula">=ROUND((H2/500)*100,2)</span> for 2 decimal places.</li>
+          <li><b>Grade column (K):</b> For now, manually type a grade based on percentage (A/B/C/D) — you'll learn to automate this with IF() in the next module.</li>
+          <li><b>Class stats:</b> In empty cells below the table, calculate:
+            <ul>
+              <li>Highest Total: <span class="formula">=MAX(H2:H16)</span></li>
+              <li>Lowest Total: <span class="formula">=MIN(H2:H16)</span></li>
+              <li>Number of students: <span class="formula">=COUNT(H2:H16)</span></li>
+              <li>Students with missing Grade: <span class="formula">=COUNTBLANK(K2:K16)</span></li>
+            </ul>
+          </li>
+          <li>Switch to the <b>GST Calculation</b> sheet.</li>
+          <li><b>GST Amount (D):</b> Click D2 → type <span class="formula">=B2*C2/100</span> → Enter → fill down to D9.</li>
+          <li><b>Final Price (E):</b> Click E2 → type <span class="formula">=B2+D2</span> → Enter → fill down to E9.</li>
+          <li>Format the Price, GST Amount, and Final Price columns as <b>Currency</b> (from Module 1, T6).</li>
+          <li>Save the file using <span class="shortcut">Ctrl + S</span>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes to avoid during the exercise</h3>
+      <div class="mistake-box"><b>Mistake:</b> Using absolute reference on the wrong cell — in this exercise, the max marks (500) and GST rate columns need care about whether they're a single fixed cell or a per-row value. Since GST Rate here is a per-row column (C2, C3...), don't lock it with $ signs — that's only needed if a single tax rate cell is reused for every row.</div>
+      <div class="mistake-box"><b>Mistake:</b> Dragging the Fill Handle without checking the last row — make sure formulas are filled exactly to row 16 (Marksheet) / row 9 (GST sheet), matching the data.</div>
+    </section>
+
+    <!-- T24 -->
+    <section class="topic" id="t24">
+      <h2 class="topic-title">T24 · Test 3</h2>
+
+      <h3 class="step-title">📌 Purpose</h3>
+      <p>Test 3 checks understanding of T17–T23: formula basics, cell references, core functions (SUM/AVERAGE/MIN/MAX/COUNT family), ROUND functions, and percentage/GST calculations.</p>
+
+      <h3 class="step-title">📝 Likely test areas</h3>
+      <ul>
+        <li>Writing a basic formula correctly starting with <code>=</code>.</li>
+        <li>Difference between Relative ($ none), Absolute ($A$1), and Mixed ($A1 or A$1) references, and predicting what happens when a formula is copied.</li>
+        <li>Choosing the correct function: SUM vs AVERAGE vs COUNT vs COUNTA vs COUNTBLANK.</li>
+        <li>Difference between ROUND, ROUNDUP, and ROUNDDOWN outcomes for the same number.</li>
+        <li>Building a percentage formula and a GST formula from scratch.</li>
+      </ul>
+
+      <h3 class="step-title">🛠️ How to prepare</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Re-do the T23 marksheet exercise from scratch without instructions, timing yourself.</li>
+          <li>Practice converting a formula's relative reference to absolute using <span class="shortcut">F4</span> until it's automatic.</li>
+          <li>Write out, on paper, what COUNT/COUNTA/COUNTBLANK would each return for a sample column with some numbers, some text, and some blanks — check your answers in Excel.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes seen in tests</h3>
+      <div class="mistake-box"><b>Mistake:</b> Forgetting that GST rate or tax percentages stored as whole numbers (like 18) must be divided by 100 in formulas — a very common calculation error.</div>
+      <div class="mistake-box"><b>Mistake:</b> Mixing up when a $ sign locks the column vs the row in a mixed reference (<code>$A1</code> locks column A; <code>A$1</code> locks row 1).</div>
+    </section>
+
+    <!-- QUICK REVISION -->
+    <section class="quick-revision" id="quickrevision">
+      <h2>⚡ Quick Revision — Module 3</h2>
+      <ul>
+        <li>Every formula starts with <code>=</code>. Basic operators: <code>+ - * / ^</code>.</li>
+        <li><b>Relative</b> (A1) changes when copied. <b>Absolute</b> ($A$1) never changes. <b>Mixed</b> ($A1 or A$1) locks only column or only row. Toggle with <span class="shortcut">F4</span>.</li>
+        <li><b>SUM()</b> adds values; <b>AutoSum</b> (Alt + =) is the fast shortcut; <b>AVERAGE()</b> finds the mean.</li>
+        <li><b>MIN()</b>/<b>MAX()</b> find smallest/largest. <b>COUNT()</b> = numeric cells only. <b>COUNTA()</b> = all non-empty cells. <b>COUNTBLANK()</b> = empty cells.</li>
+        <li><b>ROUND()</b> rounds normally. <b>ROUNDUP()</b> always rounds up. <b>ROUNDDOWN()</b> always rounds down. All actually change the stored value (unlike Format Cells decimal display).</li>
+        <li>Percentage formula: <span class="formula">=(Part/Total)*100</span>. GST Amount: <span class="formula">=Price*(Rate/100)</span>. Final Price: <span class="formula">=Price+GST Amount</span>.</li>
+        <li>Always double check whether a reference should be locked ($) — fixed single values (like one shared tax rate) need $, per-row values don't.</li>
+      </ul>
+    </section>
+
+  </div>
+</div>
+</body>
+</html>

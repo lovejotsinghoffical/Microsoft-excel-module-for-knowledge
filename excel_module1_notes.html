@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Excel Module 1 - Notes</title>
+<style>
+  :root{
+    --accent:#217346;
+    --accent-light:#eaf6ee;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+    --bg:#ffffff;
+    --code-bg:#f4f6f8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  .layout{display:flex; min-height:100vh;}
+  .sidebar{
+    width:250px;
+    flex-shrink:0;
+    background:#fafafa;
+    border-right:1px solid var(--border);
+    padding:24px 16px;
+    position:fixed;
+    top:0; left:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+  .sidebar h2{
+    font-size:15px;
+    color:var(--accent);
+    margin:0 0 16px 0;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  .sidebar a{
+    display:block;
+    color:var(--text);
+    text-decoration:none;
+    font-size:13.5px;
+    padding:6px 10px;
+    border-radius:6px;
+    margin-bottom:2px;
+  }
+  .sidebar a:hover{ background:var(--accent-light); color:var(--accent); }
+  .content{
+    margin-left:250px;
+    padding:36px 48px;
+    max-width:860px;
+  }
+  h1.page-title{ font-size:28px; margin-bottom:4px; }
+  .subtitle{ color:var(--muted); margin-bottom:32px; font-size:15px; }
+  section.topic{
+    margin-bottom:52px;
+    padding-bottom:16px;
+    border-bottom:2px solid var(--border);
+  }
+  h2.topic-title{
+    font-size:23px;
+    color:var(--accent);
+    border-left:4px solid var(--accent);
+    padding-left:12px;
+    margin-bottom:20px;
+  }
+  h3.step-title{
+    font-size:16.5px;
+    background:var(--accent-light);
+    color:var(--accent);
+    padding:8px 12px;
+    border-radius:6px;
+    margin-top:24px;
+    margin-bottom:10px;
+  }
+  p{margin:8px 0;}
+  ul, ol{margin:8px 0; padding-left:22px;}
+  li{margin-bottom:6px;}
+  .steps-box{
+    background:#f9fafb;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 18px;
+    margin:12px 0;
+  }
+  .steps-box ol{margin:0; padding-left:20px;}
+  .steps-box li{margin-bottom:8px;}
+  .example-box{
+    background:#f9fafb;
+    border-left:4px solid #10b981;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .example-box b{color:#059669;}
+  .mistake-box{
+    background:#fff7f0;
+    border-left:4px solid #f97316;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .mistake-box b{color:#c2410c;}
+  .shortcut{
+    background:var(--code-bg);
+    padding:2px 8px;
+    border-radius:4px;
+    font-family:Consolas, monospace;
+    font-size:13px;
+    border:1px solid var(--border);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    margin:12px 0;
+    font-size:13.8px;
+  }
+  th, td{ border:1px solid var(--border); padding:7px 10px; text-align:left; }
+  th{ background:var(--accent-light); color:var(--accent); }
+  .quick-revision{
+    background:#f9fafb;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 24px;
+  }
+  .quick-revision h2{ color:var(--accent); margin-top:0; }
+  .quick-revision li{margin-bottom:8px;}
+  .dataset-note{
+    background:#eef2ff;
+    border:1px solid #c7d2fe;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-size:14.5px;
+  }
+  .dataset-note b{color:#4338ca;}
+  @media print{
+    .sidebar{display:none;}
+    .content{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <div class="sidebar">
+    <h2>Excel Module 1</h2>
+    <a href="#t1">T1 · Intro to Excel</a>
+    <a href="#t2">T2 · Rows, Columns, Cells</a>
+    <a href="#t3">T3 · Data Entry & Save</a>
+    <a href="#t4">T4 · Formatting Cells</a>
+    <a href="#t5">T5 · Row/Column & Insert-Delete</a>
+    <a href="#t6">T6 · Number Formatting</a>
+    <a href="#t7">T7 · Practical Exercise</a>
+    <a href="#t8">T8 · Test & Doubts</a>
+    <a href="#quickrevision">⚡ Quick Revision</a>
+  </div>
+
+  <div class="content">
+    <h1 class="page-title">MS Excel — Module 1 Notes</h1>
+    <p class="subtitle">Beginner-friendly notes with step-by-step guidance for every topic. Use alongside the practice dataset "Student_Information_Dataset.xlsx".</p>
+
+    <!-- T1 -->
+    <section class="topic" id="t1">
+      <h2 class="topic-title">T1 · Introduction to Excel, Workbook, Worksheet, Ribbon, Interface</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>Microsoft Excel is a <b>spreadsheet program</b> — software used to store, organize, calculate, and analyze data in the form of rows and columns.</p>
+
+      <h3 class="step-title">🧩 Key terms</h3>
+      <table>
+        <tr><th>Term</th><th>Meaning</th></tr>
+        <tr><td>Workbook</td><td>The entire Excel file (extension <code>.xlsx</code>). One workbook can contain many worksheets.</td></tr>
+        <tr><td>Worksheet (Sheet)</td><td>A single page/tab inside the workbook, made of rows and columns. You can see sheet tabs at the bottom.</td></tr>
+        <tr><td>Ribbon</td><td>The toolbar strip at the top with tabs like Home, Insert, Page Layout, Formulas, Data, Review, View.</td></tr>
+        <tr><td>Cell</td><td>A single box where a row and column meet — where you type data.</td></tr>
+      </table>
+
+      <h3 class="step-title">🖥️ Excel Interface — main parts</h3>
+      <div class="steps-box">
+        <ol>
+          <li><b>Title Bar</b> — top-most bar showing the file name.</li>
+          <li><b>Ribbon</b> — tabs (Home, Insert, Formulas, etc.) with grouped commands/buttons.</li>
+          <li><b>Formula Bar</b> — shows the content/formula of the currently selected cell.</li>
+          <li><b>Name Box</b> — small box left of Formula Bar showing the active cell's address (e.g., A1).</li>
+          <li><b>Worksheet area</b> — the grid of rows and columns where you enter data.</li>
+          <li><b>Sheet Tabs</b> — bottom tabs to switch between worksheets; use the "+" icon to add a new sheet.</li>
+          <li><b>Status Bar</b> — bottom strip showing quick info like Sum/Average of selected cells, zoom controls.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to open Excel and create a new workbook</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the <b>Start</b> menu → type "Excel" → open Microsoft Excel.</li>
+          <li>On the Excel start screen, click <b>Blank Workbook</b>.</li>
+          <li>A new workbook opens with one sheet, usually named <b>Sheet1</b>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Confusing "Workbook" and "Worksheet" — remember, Workbook = the whole file (like a notebook), Worksheet = one page inside it.</div>
+
+      <h3 class="step-title">🌍 Real-world example</h3>
+      <div class="example-box">A school might keep one <b>Workbook</b> named "Student Records.xlsx" with separate <b>Worksheets</b> for each class — "Class10A", "Class10B", "Class10C" — all in the same file.</div>
+    </section>
+
+    <!-- T2 -->
+    <section class="topic" id="t2">
+      <h2 class="topic-title">T2 · Rows, Columns, Cells, Cell Address & Navigation</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>An Excel sheet is a grid made of <b>Rows</b> (horizontal, numbered 1, 2, 3...) and <b>Columns</b> (vertical, lettered A, B, C...). The box where a row and column cross is called a <b>Cell</b>.</p>
+
+      <h3 class="step-title">⚙️ How Cell Addresses work</h3>
+      <p>Every cell has a unique address written as <b>ColumnLetter + RowNumber</b>. Example: <code>B3</code> means Column B, Row 3.</p>
+      <div class="example-box">
+        <b>Example:</b> The cell in Column D, Row 5 is called <code>D5</code>. A group of cells like B2 to D6 is written as a <b>range</b>: <code>B2:D6</code>.
+      </div>
+
+      <h3 class="step-title">🛠️ How to navigate a worksheet</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click any cell with the mouse to select it directly.</li>
+          <li>Type a cell address into the <b>Name Box</b> (top-left) and press Enter to jump there instantly.</li>
+          <li>Use arrow keys (↑ ↓ ← →) to move one cell at a time.</li>
+          <li>Press <span class="shortcut">Ctrl + Home</span> to jump to cell A1.</li>
+          <li>Press <span class="shortcut">Ctrl + End</span> to jump to the last used cell in the sheet.</li>
+          <li>Press <span class="shortcut">Ctrl + →</span> or <span class="shortcut">Ctrl + ↓</span> to jump to the edge of a data block.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⏰ When to use this</h3>
+      <p>Use Name Box navigation or Ctrl+End when working with large sheets (hundreds/thousands of rows) — much faster than scrolling.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Beginners often say "row A" or "column 3" — remember, rows are always numbers, columns are always letters.</div>
+    </section>
+
+    <!-- T3 -->
+    <section class="topic" id="t3">
+      <h2 class="topic-title">T3 · Data Entry, Editing, Save/Open Workbook</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>This covers how to type data into cells, correct mistakes, and save your work so it isn't lost.</p>
+
+      <h3 class="step-title">🛠️ How to enter data</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click on a cell to select it.</li>
+          <li>Type the value (text or number).</li>
+          <li>Press <span class="shortcut">Enter</span> to confirm and move down, or <span class="shortcut">Tab</span> to move right.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to edit existing data</h3>
+      <div class="steps-box">
+        <ol>
+          <li><b>Double-click</b> the cell to edit inside it directly, OR select the cell and press <span class="shortcut">F2</span>.</li>
+          <li>Make your changes, then press Enter.</li>
+          <li>To clear a cell's content only, select it and press <span class="shortcut">Delete</span>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to save a workbook</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Press <span class="shortcut">Ctrl + S</span>, or go to File → Save.</li>
+          <li>First time saving: choose a location, type a file name, keep format as <code>.xlsx</code>, click Save.</li>
+          <li>To save a copy with a new name, use <b>File → Save As</b>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to open an existing workbook</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Open Excel → click File → Open.</li>
+          <li>Browse to the file location and double-click the file, OR just double-click the file directly from File Explorer.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Forgetting to save regularly. Always press <span class="shortcut">Ctrl + S</span> every few minutes to avoid losing work if Excel crashes.</div>
+    </section>
+
+    <!-- T4 -->
+    <section class="topic" id="t4">
+      <h2 class="topic-title">T4 · Formatting Cells (Font, Alignment, Borders, Colors, Wrap Text)</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>Formatting changes how data <i>looks</i> without changing the actual value — making sheets easier to read and more professional.</p>
+
+      <h3 class="step-title">🛠️ How to format Font (bold, size, color)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the cell(s).</li>
+          <li>Go to the <b>Home</b> tab → <b>Font</b> group.</li>
+          <li>Click <b>B</b> for Bold, <b>I</b> for Italic, <b>U</b> for Underline.</li>
+          <li>Use the Font Size dropdown to increase/decrease text size.</li>
+          <li>Click the Font Color (A with red underline) dropdown to change text color.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to set Alignment</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the cell(s).</li>
+          <li>In Home tab → <b>Alignment</b> group, click Left / Center / Right align icons for horizontal alignment.</li>
+          <li>Use Top / Middle / Bottom align icons for vertical alignment.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to add Borders</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the cell range.</li>
+          <li>In Home tab → Font group, click the small dropdown arrow next to the Borders icon (looks like a grid).</li>
+          <li>Choose an option, e.g., <b>All Borders</b> for a full grid.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to apply Fill Color (cell background)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the cell(s).</li>
+          <li>Home tab → click the dropdown next to the paint-bucket icon (Fill Color).</li>
+          <li>Pick a color.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to Wrap Text</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select cell(s) where text is overflowing or getting cut off.</li>
+          <li>Home tab → Alignment group → click <b>Wrap Text</b>.</li>
+          <li>The row height will auto-adjust so all text is visible on multiple lines within the cell.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Confusing Font Color with Fill Color — Font Color changes the <i>text</i> color; Fill Color changes the <i>cell background</i> color.</div>
+
+      <h3 class="step-title">🌍 Real-world example</h3>
+      <div class="example-box">In a report, headers are usually made <b>Bold</b>, <b>Center-aligned</b>, with a colored <b>Fill</b>, and <b>All Borders</b> — so they stand out clearly from the data below.</div>
+    </section>
+
+    <!-- T5 -->
+    <section class="topic" id="t5">
+      <h2 class="topic-title">T5 · Row Height, Column Width, Insert/Delete Rows & Columns</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>Adjusting how much space rows/columns take up, and adding or removing rows/columns as your data changes.</p>
+
+      <h3 class="step-title">🛠️ How to resize Column Width</h3>
+      <div class="steps-box">
+        <ol>
+          <li><b>Manual:</b> Hover mouse on the line between two column letters until you see a ↔ cursor, then click-drag.</li>
+          <li><b>Exact value:</b> Right-click the column letter → <b>Column Width</b> → type a number → OK.</li>
+          <li><b>Auto-fit:</b> Double-click the border line between two columns to auto-fit width to the longest content.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to resize Row Height</h3>
+      <div class="steps-box">
+        <ol>
+          <li><b>Manual:</b> Hover on the line between two row numbers until you see a ↕ cursor, then click-drag.</li>
+          <li><b>Exact value:</b> Right-click the row number → <b>Row Height</b> → type a number → OK.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to Insert a Row or Column</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Right-click the row number (or column letter) <b>next to</b> where you want the new one.</li>
+          <li>Click <b>Insert</b>. A new blank row appears above, or a new blank column appears to the left.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to Delete a Row or Column</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Right-click the row number (or column letter) you want to remove.</li>
+          <li>Click <b>Delete</b>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Pressing Delete key only clears cell content, but the empty row/column still exists. To fully remove a row/column, use right-click → Delete, not the Delete key.</div>
+    </section>
+
+    <!-- T6 -->
+    <section class="topic" id="t6">
+      <h2 class="topic-title">T6 · Number Formatting (Currency, Date, Time, Percentage, Decimal)</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>Number formatting controls how a number is <i>displayed</i> — as currency, date, percentage, etc. — without changing its actual underlying value.</p>
+
+      <h3 class="step-title">🛠️ How to apply Number Formats (Quick way)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the cell(s) with numbers.</li>
+          <li>Go to Home tab → <b>Number</b> group.</li>
+          <li>Use the dropdown (says "General" by default) to pick: Number, Currency, Date, Time, Percentage, etc.</li>
+          <li>Or click the quick icons: <code>$</code> for Currency, <code>%</code> for Percentage, <code>,</code> for comma-style thousands separator.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to apply Custom / Detailed Formats</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the cell(s).</li>
+          <li>Right-click → <b>Format Cells</b> (or press <span class="shortcut">Ctrl + 1</span>).</li>
+          <li>Go to the <b>Number</b> tab in the dialog box.</li>
+          <li>Choose a category (Currency, Date, Percentage, etc.) and set decimal places or symbol as needed.</li>
+          <li>Click OK.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">📋 Common formats reference</h3>
+      <table>
+        <tr><th>Format</th><th>Example Input</th><th>Displayed As</th></tr>
+        <tr><td>Currency</td><td>85000</td><td>₹85,000.00</td></tr>
+        <tr><td>Date</td><td>2026-01-05</td><td>05-Jan-2026</td></tr>
+        <tr><td>Percentage</td><td>0.92</td><td>92%</td></tr>
+        <tr><td>Decimal (2 places)</td><td>78</td><td>78.00</td></tr>
+        <tr><td>Time</td><td>13:30</td><td>1:30 PM</td></tr>
+      </table>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Typing "92%" directly sometimes gets stored differently than expected. Safer approach: type <code>0.92</code> then apply Percentage format, or type <code>92%</code> directly and let Excel auto-convert it.</div>
+    </section>
+
+    <!-- T7 -->
+    <section class="topic" id="t7">
+      <h2 class="topic-title">T7 · Practical Exercise — Student Information Sheet</h2>
+
+      <h3 class="step-title">📌 Goal</h3>
+      <p>Apply everything learned in T1–T6 on a real dataset: entering data, resizing, formatting cells, and number formatting.</p>
+
+      <div class="dataset-note">
+        <b>Dataset provided:</b> <code>Student_Information_Dataset.xlsx</code> — contains 15 students with Roll No, Name, Class, Date of Birth, Gender, Contact Number, Email ID, Fee Amount, Fee Paid Date, Attendance (%), and Marks Obtained. The data is deliberately left <b>unformatted</b> so you can practice formatting it yourself.
+      </div>
+
+      <h3 class="step-title">🛠️ Step-by-step exercise instructions</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Open <code>Student_Information_Dataset.xlsx</code>.</li>
+          <li><b>Header row:</b> Select row 1 → make it <b>Bold</b>, <b>Center-aligned</b>, apply a <b>Fill Color</b> (e.g., light green), and add <b>All Borders</b>.</li>
+          <li><b>Column width:</b> Auto-fit all columns so no text is cut off (double-click column border lines, or select all columns → Home → Format → AutoFit Column Width).</li>
+          <li><b>Freeze header row</b> (optional): View tab → Freeze Panes → Freeze Top Row, so headers stay visible while scrolling.</li>
+          <li><b>Fee Amount column:</b> Apply <b>Currency</b> format (₹ symbol, 0 decimals).</li>
+          <li><b>Date of Birth & Fee Paid Date columns:</b> Apply <b>Date</b> format as <code>DD-MMM-YYYY</code> (e.g., 05-Jan-2026).</li>
+          <li><b>Attendance (%) column:</b> Apply <b>Percentage</b> format if values are stored as decimals, or simply confirm the % symbol displays correctly.</li>
+          <li><b>Borders:</b> Select the entire data range (A1 to K16) → apply <b>All Borders</b> for a clean grid look.</li>
+          <li><b>Insert a new row</b> at the top for a sheet title, e.g. type "Student Information Sheet – BTech 2026" in cell A1, then merge & center it across the columns (Home → Merge & Center).</li>
+          <li><b>Insert a new column</b> after "Marks Obtained" titled "Result" — you'll fill this manually with Pass/Fail based on marks (this sets up for formulas in the next module).</li>
+          <li>Save the file using <span class="shortcut">Ctrl + S</span>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes to avoid during the exercise</h3>
+      <div class="mistake-box"><b>Mistake:</b> Applying currency/date formatting to the wrong column (e.g., formatting Roll No as currency). Always double-check you've selected the correct column before formatting.</div>
+      <div class="mistake-box"><b>Mistake:</b> Not saving before closing — always save with <span class="shortcut">Ctrl + S</span> after each major step.</div>
+    </section>
+
+    <!-- T8 -->
+    <section class="topic" id="t8">
+      <h2 class="topic-title">T8 · Test 1 + Doubt Session</h2>
+
+      <h3 class="step-title">📌 Purpose</h3>
+      <p>Test 1 checks understanding of T1–T7: Excel interface, navigation, data entry, formatting, and number formats. The doubt session lets students clarify anything unclear before moving to Module 2.</p>
+
+      <h3 class="step-title">📝 Likely test areas (based on T1–T7)</h3>
+      <ul>
+        <li>Identifying parts of the Excel interface (Ribbon, Formula Bar, Name Box, Sheet Tabs).</li>
+        <li>Writing correct cell addresses and ranges (e.g., what does B2:D6 mean?).</li>
+        <li>Steps to format a cell (bold, borders, fill color, wrap text).</li>
+        <li>Steps to insert/delete a row or column correctly.</li>
+        <li>Choosing the right number format for a given type of data (currency vs. date vs. percentage).</li>
+      </ul>
+
+      <h3 class="step-title">🛠️ How to prepare</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Re-open the practice file from T7 and redo the formatting steps without looking at instructions, to test recall.</li>
+          <li>Practice navigating using Name Box and Ctrl+Home / Ctrl+End without the mouse.</li>
+          <li>Note down any step you hesitate on — bring it to the doubt session.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes seen in tests</h3>
+      <div class="mistake-box"><b>Mistake:</b> Mixing up row vs. column terms, or writing cell address as "2B" instead of "B2" (column letter always comes first).</div>
+    </section>
+
+    <!-- QUICK REVISION -->
+    <section class="quick-revision" id="quickrevision">
+      <h2>⚡ Quick Revision — Module 1</h2>
+      <ul>
+        <li><b>Workbook</b> = whole file. <b>Worksheet</b> = one tab/page inside it. <b>Cell</b> = intersection of a row and column.</li>
+        <li><b>Cell address</b> = Column letter + Row number (e.g., B3). Range = <code>B2:D6</code>.</li>
+        <li>Navigate fast: Name Box, Ctrl+Home (go to A1), Ctrl+End (last used cell).</li>
+        <li>Edit a cell: double-click or press <span class="shortcut">F2</span>. Save: <span class="shortcut">Ctrl + S</span>.</li>
+        <li>Formatting (Font, Alignment, Borders, Fill Color, Wrap Text) is all in the <b>Home tab</b>.</li>
+        <li>Resize rows/columns by dragging borders, or right-click → Row Height / Column Width for exact values.</li>
+        <li>Insert/Delete rows & columns via right-click on the row number / column letter.</li>
+        <li>Number formatting (Currency, Date, Time, %, Decimal) via Home tab dropdown or <span class="shortcut">Ctrl + 1</span> → Format Cells.</li>
+        <li>Formatting changes only the <i>display</i>, never the actual stored value.</li>
+      </ul>
+    </section>
+
+  </div>
+</div>
+</body>
+</html>

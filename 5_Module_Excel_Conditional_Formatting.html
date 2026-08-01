@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Excel Module 5 - Notes</title>
+<style>
+  :root{
+    --accent:#217346;
+    --accent-light:#eaf6ee;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+    --bg:#ffffff;
+    --code-bg:#f4f6f8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  .layout{display:flex; min-height:100vh;}
+  .sidebar{
+    width:250px;
+    flex-shrink:0;
+    background:#fafafa;
+    border-right:1px solid var(--border);
+    padding:24px 16px;
+    position:fixed;
+    top:0; left:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+  .sidebar h2{
+    font-size:15px;
+    color:var(--accent);
+    margin:0 0 16px 0;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  .sidebar a{
+    display:block;
+    color:var(--text);
+    text-decoration:none;
+    font-size:13.5px;
+    padding:6px 10px;
+    border-radius:6px;
+    margin-bottom:2px;
+  }
+  .sidebar a:hover{ background:var(--accent-light); color:var(--accent); }
+  .content{
+    margin-left:250px;
+    padding:36px 48px;
+    max-width:860px;
+  }
+  h1.page-title{ font-size:28px; margin-bottom:4px; }
+  .subtitle{ color:var(--muted); margin-bottom:32px; font-size:15px; }
+  section.topic{
+    margin-bottom:52px;
+    padding-bottom:16px;
+    border-bottom:2px solid var(--border);
+  }
+  h2.topic-title{
+    font-size:23px;
+    color:var(--accent);
+    border-left:4px solid var(--accent);
+    padding-left:12px;
+    margin-bottom:20px;
+  }
+  h3.step-title{
+    font-size:16.5px;
+    background:var(--accent-light);
+    color:var(--accent);
+    padding:8px 12px;
+    border-radius:6px;
+    margin-top:24px;
+    margin-bottom:10px;
+  }
+  p{margin:8px 0;}
+  ul, ol{margin:8px 0; padding-left:22px;}
+  li{margin-bottom:6px;}
+  .steps-box{
+    background:#f9fafb;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 18px;
+    margin:12px 0;
+  }
+  .steps-box ol{margin:0; padding-left:20px;}
+  .steps-box li{margin-bottom:8px;}
+  .example-box{
+    background:#f9fafb;
+    border-left:4px solid #10b981;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .example-box b{color:#059669;}
+  .mistake-box{
+    background:#fff7f0;
+    border-left:4px solid #f97316;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .mistake-box b{color:#c2410c;}
+  .shortcut{
+    background:var(--code-bg);
+    padding:2px 8px;
+    border-radius:4px;
+    font-family:Consolas, monospace;
+    font-size:13px;
+    border:1px solid var(--border);
+  }
+  .formula{
+    background:#eef2ff;
+    border:1px solid #c7d2fe;
+    color:#4338ca;
+    padding:3px 8px;
+    border-radius:4px;
+    font-family:Consolas, monospace;
+    font-size:14px;
+    display:inline-block;
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    margin:12px 0;
+    font-size:13.8px;
+  }
+  th, td{ border:1px solid var(--border); padding:7px 10px; text-align:left; }
+  th{ background:var(--accent-light); color:var(--accent); }
+  .quick-revision{
+    background:#f9fafb;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 24px;
+  }
+  .quick-revision h2{ color:var(--accent); margin-top:0; }
+  .quick-revision li{margin-bottom:8px;}
+  .dataset-note{
+    background:#eef2ff;
+    border:1px solid #c7d2fe;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-size:14.5px;
+  }
+  .dataset-note b{color:#4338ca;}
+  @media print{
+    .sidebar{display:none;}
+    .content{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <div class="sidebar">
+    <h2>Excel Module 5</h2>
+    <a href="#t32">T32 · Conditional Formatting</a>
+    <a href="#t33">T33 · Data Validation</a>
+    <a href="#t34">T34 · Duplicates & Text to Columns</a>
+    <a href="#t35">T35 · Charts</a>
+    <a href="#t36">T36 · Printing & Page Layout</a>
+    <a href="#t37">T37 · Practical – Sales Report</a>
+    <a href="#t38">T38 · Test 5</a>
+    <a href="#quickrevision">⚡ Quick Revision</a>
+  </div>
+
+  <div class="content">
+    <h1 class="page-title">MS Excel — Module 5 Notes</h1>
+    <p class="subtitle">Data Management — beginner-friendly notes with step-by-step guidance. Use alongside the practice dataset "Sales_Report_Dataset.xlsx".</p>
+
+    <!-- T32 -->
+    <section class="topic" id="t32">
+      <h2 class="topic-title">T32 · Conditional Formatting</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>Conditional Formatting automatically changes a cell's appearance (color, icon, bar) based on its value — so patterns, outliers, and important numbers jump out visually, without you manually coloring anything.</p>
+
+      <h3 class="step-title">🛠️ How to highlight cells by a rule (e.g., Sales &gt; 100000)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the range of cells (e.g., the Sales Amount column).</li>
+          <li>Go to <b>Home tab → Conditional Formatting → Highlight Cells Rules → Greater Than...</b></li>
+          <li>Type the value to compare against (e.g., <code>100000</code>).</li>
+          <li>Choose a formatting style from the dropdown (e.g., "Green Fill with Dark Green Text").</li>
+          <li>Click OK.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to add Data Bars, Color Scales, or Icon Sets</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the range of numbers.</li>
+          <li>Go to <b>Home tab → Conditional Formatting</b>.</li>
+          <li>Choose <b>Data Bars</b> (in-cell bar length shows relative size), <b>Color Scales</b> (gradient from low to high), or <b>Icon Sets</b> (arrows/traffic lights based on value).</li>
+          <li>Pick a style — it applies instantly.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to create a Custom Rule (using a formula)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the range.</li>
+          <li>Home tab → Conditional Formatting → <b>New Rule...</b></li>
+          <li>Choose <b>"Use a formula to determine which cells to format"</b>.</li>
+          <li>Type a formula that returns TRUE/FALSE, e.g. <code>=$E2&gt;100000</code></li>
+          <li>Click <b>Format...</b>, choose a fill/font style, click OK, then OK again.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to remove Conditional Formatting</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the affected range (or the whole sheet).</li>
+          <li>Home tab → Conditional Formatting → <b>Clear Rules → Clear Rules from Selected Cells</b> (or Entire Sheet).</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🌍 Real-world example</h3>
+      <div class="example-box">In a sales sheet, applying Data Bars to the "Sales Amount" column instantly shows which orders are biggest — longer bar = higher sale — without reading every number.</div>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Selecting only one cell instead of the full column/range before applying the rule — the formatting then only affects that single cell.</div>
+    </section>
+
+    <!-- T33 -->
+    <section class="topic" id="t33">
+      <h2 class="topic-title">T33 · Data Validation (Drop-down Lists)</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>Data Validation restricts what can be typed into a cell — commonly used to create a <b>drop-down list</b>, so users can only pick from a fixed set of options instead of typing freely (which prevents typos and inconsistent entries).</p>
+
+      <h3 class="step-title">🛠️ How to create a Drop-down List</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the cell(s) where the dropdown should appear (e.g., the "Order Status" column).</li>
+          <li>Go to <b>Data tab → Data Validation</b>.</li>
+          <li>In the "Allow" dropdown, choose <b>List</b>.</li>
+          <li>In the "Source" box, type your options separated by commas, e.g. <code>Pending,Completed,Cancelled</code></li>
+          <li>Click OK.</li>
+          <li>Click any cell in that range — a small dropdown arrow appears; click it to pick a value.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to create a Drop-down from a cell range (better for long lists)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Type your list of options somewhere in the sheet (e.g., in cells H1:H3).</li>
+          <li>Select the target cell(s) for the dropdown.</li>
+          <li>Data tab → Data Validation → Allow: List.</li>
+          <li>In Source, click the range selector icon and select H1:H3 instead of typing values directly.</li>
+          <li>Click OK.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⏰ When to use this</h3>
+      <p>Use Data Validation whenever a column should only ever contain a fixed set of values — statuses, departments, yes/no fields, grades — to keep data clean and consistent for later sorting, filtering, and formulas like SUMIF/COUNTIF.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Typing a comma-separated list with extra spaces (e.g., <code>Pending, Completed</code>) — the space becomes part of the option and can cause mismatches in formulas later. Keep it clean: <code>Pending,Completed</code>.</div>
+    </section>
+
+    <!-- T34 -->
+    <section class="topic" id="t34">
+      <h2 class="topic-title">T34 · Remove Duplicates & Text to Columns</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p><b>Remove Duplicates</b> deletes repeated rows automatically. <b>Text to Columns</b> splits one column's text into multiple columns based on a delimiter (like a comma, space, or dash).</p>
+
+      <h3 class="step-title">🛠️ How to Remove Duplicates</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click any cell inside your data range.</li>
+          <li>Go to <b>Data tab → Remove Duplicates</b>.</li>
+          <li>A dialog shows all your columns with checkboxes — keep all ticked if a duplicate should only count when <i>every</i> column matches.</li>
+          <li>Click OK.</li>
+          <li>Excel shows a summary: how many duplicate rows were removed and how many unique rows remain.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to use Text to Columns</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the column you want to split (e.g., a column with "Laptop-North" style entries).</li>
+          <li><b>Important:</b> make sure there's an empty column to the right, or existing data there will be overwritten.</li>
+          <li>Go to <b>Data tab → Text to Columns</b>.</li>
+          <li>Choose <b>Delimited</b> → click Next.</li>
+          <li>Tick the delimiter that separates your data (e.g., tick "Other" and type <code>-</code> for a dash, or tick "Comma" / "Space" as needed) → click Next.</li>
+          <li>Preview the split columns at the bottom → click <b>Finish</b>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🌍 Real-world example</h3>
+      <div class="example-box">
+        A "Product_Region" column with values like <code>Laptop-North</code> can be split using Text to Columns with delimiter <code>-</code> into two clean columns: "Product" (Laptop) and "Region" (North) — making it possible to Sort/Filter/SUMIF by Region alone.
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Running Text to Columns without an empty column ready on the right — it will silently overwrite whatever data was already there.</div>
+      <div class="mistake-box"><b>Mistake:</b> Using Remove Duplicates with only some columns ticked when you meant to check the whole row — this can delete rows that only match partially, not truly identical duplicates.</div>
+    </section>
+
+    <!-- T35 -->
+    <section class="topic" id="t35">
+      <h2 class="topic-title">T35 · Charts (Column, Bar, Pie, Line)</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>Charts turn rows of numbers into visual pictures, making trends and comparisons much easier to understand at a glance.</p>
+
+      <h3 class="step-title">🧩 Which chart type to use</h3>
+      <table>
+        <tr><th>Chart Type</th><th>Best for</th></tr>
+        <tr><td>Column Chart</td><td>Comparing values across categories (vertical bars), e.g. sales by product</td></tr>
+        <tr><td>Bar Chart</td><td>Same as Column but horizontal — good when category names are long</td></tr>
+        <tr><td>Pie Chart</td><td>Showing proportion/percentage of a whole, e.g. market share by product</td></tr>
+        <tr><td>Line Chart</td><td>Showing trends over time, e.g. monthly sales growth</td></tr>
+      </table>
+
+      <h3 class="step-title">🛠️ How to create a Chart</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the data you want to chart, including headers (e.g., Product names + Sales Amount).</li>
+          <li>Go to <b>Insert tab → Charts group</b>.</li>
+          <li>Click the chart type you want (Column, Bar, Pie, or Line) and pick a sub-style from the dropdown.</li>
+          <li>The chart appears on the sheet — drag its corner to resize, or drag the chart itself to reposition.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to edit a Chart</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the chart to select it — this reveals the <b>Chart Design</b> and <b>Format</b> tabs on the Ribbon.</li>
+          <li>Use <b>Chart Design → Add Chart Element</b> to add/edit a Title, Data Labels, Axis Titles, or Legend.</li>
+          <li>Use <b>Chart Design → Change Chart Type</b> if you want to switch, e.g., from Column to Line.</li>
+          <li>Right-click any data series → <b>Format Data Series</b> to change colors.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🌍 Real-world example</h3>
+      <div class="example-box">A Pie Chart of "Sales Amount by Product" instantly shows which product contributes the biggest slice of total revenue — much faster to grasp than scanning a table of numbers.</div>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Selecting the wrong data range (e.g., including an ID column as if it were numeric data) — this creates a confusing or meaningless chart. Only select category labels + the actual numeric values you want to compare.</div>
+    </section>
+
+    <!-- T36 -->
+    <section class="topic" id="t36">
+      <h2 class="topic-title">T36 · Printing, Page Layout & Headers/Footers</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>This covers preparing a worksheet so it prints correctly on paper — setting margins, orientation, and adding headers/footers (like page numbers or a report title) that appear on every printed page.</p>
+
+      <h3 class="step-title">🛠️ How to set Page Orientation & Margins</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Go to <b>Page Layout tab</b>.</li>
+          <li>Click <b>Orientation</b> → choose Portrait or Landscape.</li>
+          <li>Click <b>Margins</b> → choose Normal, Wide, Narrow, or Custom Margins.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to set the Print Area</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the exact range of cells you want to print.</li>
+          <li>Page Layout tab → <b>Print Area → Set Print Area</b>.</li>
+          <li>Only this selected range will print, even if there's more data on the sheet.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to add Headers/Footers</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Go to <b>Insert tab → Header & Footer</b> (switches to Page Layout view).</li>
+          <li>Click into the top area to type a Header (e.g., a report title), or the bottom area for a Footer.</li>
+          <li>Use the <b>Header & Footer Elements</b> options that appear (like Page Number, Date, File Name) to insert dynamic fields.</li>
+          <li>Click anywhere outside the header/footer box when done.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to Preview and Print</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Press <span class="shortcut">Ctrl + P</span> to open Print Preview.</li>
+          <li>Check how the pages will look — adjust scaling under "Settings" if content is getting cut off (e.g., choose "Fit Sheet on One Page").</li>
+          <li>Click <b>Print</b> when it looks correct.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⏰ When to use this</h3>
+      <p>Always preview before printing large reports — checking Print Area and page fit prevents wasted paper and split tables across multiple pages.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Not setting a Print Area on a sheet with extra stray data far below/right of the main table — Excel may print many blank/extra pages. Always set the Print Area explicitly.</div>
+    </section>
+
+    <!-- T37 -->
+    <section class="topic" id="t37">
+      <h2 class="topic-title">T37 · Practical Exercise — Sales Report</h2>
+
+      <h3 class="step-title">📌 Goal</h3>
+      <p>Apply everything from T32–T36 on a real sales dataset: Conditional Formatting, Data Validation, Remove Duplicates, Text to Columns, Charts, and Print setup.</p>
+
+      <div class="dataset-note">
+        <b>Dataset provided:</b> <code>Sales_Report_Dataset.xlsx</code> — 25 orders with a combined "Product_Region" column (e.g., "Laptop-North"), Salesperson, Quantity, Sales Amount, and a blank "Order Status" column. Contains 3 intentional exact-duplicate rows for Remove Duplicates practice.
+      </div>
+
+      <h3 class="step-title">🛠️ Step-by-step exercise instructions</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Open <code>Sales_Report_Dataset.xlsx</code>.</li>
+          <li><b>Remove Duplicates first:</b> Click inside the data → Data tab → Remove Duplicates → OK. Confirm 3 duplicate rows are removed (25 rows should become 22).</li>
+          <li><b>Text to Columns:</b> Insert two new empty columns after "Order ID" (right-click column B → Insert, twice), label them "Product" and "Region". Select the "Product_Region" column → Data tab → Text to Columns → Delimited → Other: <code>-</code> → Finish. Confirm Product and Region are now separate.</li>
+          <li><b>Data Validation:</b> Select the "Order Status" column → Data tab → Data Validation → List → Source: <code>Pending,Completed,Cancelled</code> → OK. Fill in a status for each order using the dropdown.</li>
+          <li><b>Conditional Formatting:</b> Select the "Sales Amount" column → Home tab → Conditional Formatting → Data Bars → pick any color style.</li>
+          <li><b>Conditional Formatting (custom rule):</b> Add a second rule highlighting Sales Amount &gt; 100000 in green fill, using Highlight Cells Rules → Greater Than.</li>
+          <li><b>Chart 1 (Column):</b> Select Product and Sales Amount columns (use Ctrl to select both non-adjacent columns) → Insert tab → Column Chart. Add a chart title: "Sales by Product".</li>
+          <li><b>Chart 2 (Pie):</b> Select Region and Sales Amount → Insert tab → Pie Chart. Add a chart title: "Sales Share by Region".</li>
+          <li><b>Page Layout:</b> Go to Page Layout tab → set Orientation to Landscape → Print Area → Set Print Area over the data table.</li>
+          <li><b>Header/Footer:</b> Insert tab → Header & Footer → type "Sales Report – Module 5" as the header, insert Page Number in the footer.</li>
+          <li>Preview with <span class="shortcut">Ctrl + P</span> to confirm it looks clean, then save the file with <span class="shortcut">Ctrl + S</span>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes to avoid during the exercise</h3>
+      <div class="mistake-box"><b>Mistake:</b> Running Text to Columns before inserting the empty destination columns — this overwrites the "Salesperson" column that originally sits right next to "Product_Region".</div>
+      <div class="mistake-box"><b>Mistake:</b> Forgetting to select header cells when creating a chart — without headers, the chart legend/labels show as "Series1" instead of meaningful names.</div>
+
+      <h3 class="step-title">🌍 Real-world example</h3>
+      <div class="example-box">This mirrors how a real sales manager cleans and reports monthly data: dedupe raw exports, split combined fields, standardize status entries with a dropdown, highlight top performers with conditional formatting, and present the summary in charts and a printable report.</div>
+    </section>
+
+    <!-- T38 -->
+    <section class="topic" id="t38">
+      <h2 class="topic-title">T38 · Test 5</h2>
+
+      <h3 class="step-title">📌 Purpose</h3>
+      <p>Test 5 checks understanding of T32–T37: Conditional Formatting, Data Validation, Remove Duplicates, Text to Columns, Charts, and Print/Page Layout setup.</p>
+
+      <h3 class="step-title">📝 Likely test areas</h3>
+      <ul>
+        <li>Steps to apply a Conditional Formatting rule (both a preset rule and a custom formula rule).</li>
+        <li>Steps to create a dropdown list using Data Validation, and why it's useful.</li>
+        <li>Difference between Remove Duplicates behavior when all columns vs only some columns are ticked.</li>
+        <li>Correct delimiter choice and column-order caution for Text to Columns.</li>
+        <li>Choosing the right chart type for a given scenario (proportion vs trend vs comparison).</li>
+        <li>Steps to set a Print Area and add a Header/Footer.</li>
+      </ul>
+
+      <h3 class="step-title">🛠️ How to prepare</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Redo the T37 sales report exercise from scratch without instructions.</li>
+          <li>Practice explaining, in one line each, when you'd use a Column vs Pie vs Line chart.</li>
+          <li>Re-check the Text to Columns steps carefully, especially the "insert empty columns first" precaution.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes seen in tests</h3>
+      <div class="mistake-box"><b>Mistake:</b> Mixing up "Delimited" vs "Fixed Width" in Text to Columns — for data separated by a symbol (comma, dash, space), always choose Delimited.</div>
+      <div class="mistake-box"><b>Mistake:</b> Choosing a Pie Chart for data that changes over time — Pie Charts show proportion at a single point, not trends; a Line Chart is correct for trends.</div>
+    </section>
+
+    <!-- QUICK REVISION -->
+    <section class="quick-revision" id="quickrevision">
+      <h2>⚡ Quick Revision — Module 5</h2>
+      <ul>
+        <li><b>Conditional Formatting</b> (Home tab): auto-styles cells based on value — preset rules, Data Bars/Color Scales/Icon Sets, or custom formula rules.</li>
+        <li><b>Data Validation</b> (Data tab → Data Validation → List): creates dropdown lists to keep entries consistent.</li>
+        <li><b>Remove Duplicates</b> (Data tab): deletes rows that fully match across ticked columns.</li>
+        <li><b>Text to Columns</b> (Data tab): splits one column into many by a delimiter — always keep an empty column ready on the right first.</li>
+        <li><b>Charts</b> (Insert tab): Column/Bar = compare categories, Pie = show proportion, Line = show trend over time.</li>
+        <li><b>Print setup</b> (Page Layout tab): set Orientation, Margins, and Print Area before printing; use Insert → Header & Footer for titles/page numbers; preview with Ctrl+P.</li>
+      </ul>
+    </section>
+
+  </div>
+</div>
+</body>
+</html>

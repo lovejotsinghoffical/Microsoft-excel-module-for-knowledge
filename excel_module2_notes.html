@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Excel Module 2 - Notes</title>
+<style>
+  :root{
+    --accent:#217346;
+    --accent-light:#eaf6ee;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+    --bg:#ffffff;
+    --code-bg:#f4f6f8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  .layout{display:flex; min-height:100vh;}
+  .sidebar{
+    width:250px;
+    flex-shrink:0;
+    background:#fafafa;
+    border-right:1px solid var(--border);
+    padding:24px 16px;
+    position:fixed;
+    top:0; left:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+  .sidebar h2{
+    font-size:15px;
+    color:var(--accent);
+    margin:0 0 16px 0;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  .sidebar a{
+    display:block;
+    color:var(--text);
+    text-decoration:none;
+    font-size:13.5px;
+    padding:6px 10px;
+    border-radius:6px;
+    margin-bottom:2px;
+  }
+  .sidebar a:hover{ background:var(--accent-light); color:var(--accent); }
+  .content{
+    margin-left:250px;
+    padding:36px 48px;
+    max-width:860px;
+  }
+  h1.page-title{ font-size:28px; margin-bottom:4px; }
+  .subtitle{ color:var(--muted); margin-bottom:32px; font-size:15px; }
+  section.topic{
+    margin-bottom:52px;
+    padding-bottom:16px;
+    border-bottom:2px solid var(--border);
+  }
+  h2.topic-title{
+    font-size:23px;
+    color:var(--accent);
+    border-left:4px solid var(--accent);
+    padding-left:12px;
+    margin-bottom:20px;
+  }
+  h3.step-title{
+    font-size:16.5px;
+    background:var(--accent-light);
+    color:var(--accent);
+    padding:8px 12px;
+    border-radius:6px;
+    margin-top:24px;
+    margin-bottom:10px;
+  }
+  p{margin:8px 0;}
+  ul, ol{margin:8px 0; padding-left:22px;}
+  li{margin-bottom:6px;}
+  .steps-box{
+    background:#f9fafb;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 18px;
+    margin:12px 0;
+  }
+  .steps-box ol{margin:0; padding-left:20px;}
+  .steps-box li{margin-bottom:8px;}
+  .example-box{
+    background:#f9fafb;
+    border-left:4px solid #10b981;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .example-box b{color:#059669;}
+  .mistake-box{
+    background:#fff7f0;
+    border-left:4px solid #f97316;
+    padding:10px 14px;
+    border-radius:4px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .mistake-box b{color:#c2410c;}
+  .shortcut{
+    background:var(--code-bg);
+    padding:2px 8px;
+    border-radius:4px;
+    font-family:Consolas, monospace;
+    font-size:13px;
+    border:1px solid var(--border);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    margin:12px 0;
+    font-size:13.8px;
+  }
+  th, td{ border:1px solid var(--border); padding:7px 10px; text-align:left; }
+  th{ background:var(--accent-light); color:var(--accent); }
+  .quick-revision{
+    background:#f9fafb;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 24px;
+  }
+  .quick-revision h2{ color:var(--accent); margin-top:0; }
+  .quick-revision li{margin-bottom:8px;}
+  .dataset-note{
+    background:#eef2ff;
+    border:1px solid #c7d2fe;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+    font-size:14.5px;
+  }
+  .dataset-note b{color:#4338ca;}
+  @media print{
+    .sidebar{display:none;}
+    .content{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <div class="sidebar">
+    <h2>Excel Module 2</h2>
+    <a href="#t9">T9 · Copy, Cut, Paste Special</a>
+    <a href="#t10">T10 · AutoFill & Fill Handle</a>
+    <a href="#t11">T11 · Flash Fill</a>
+    <a href="#t12">T12 · Find, Replace, Go To</a>
+    <a href="#t13">T13 · Sort & Filter</a>
+    <a href="#t14">T14 · Freeze/Split/Hide</a>
+    <a href="#t15">T15 · Practical Exercise</a>
+    <a href="#quickrevision">⚡ Quick Revision</a>
+  </div>
+
+  <div class="content">
+    <h1 class="page-title">MS Excel — Module 2 Notes</h1>
+    <p class="subtitle">Working with Data — beginner-friendly notes with step-by-step guidance. Use alongside the practice dataset "Employee_Database_Dataset.xlsx".</p>
+
+    <!-- T9 -->
+    <section class="topic" id="t9">
+      <h2 class="topic-title">T9 · Copy, Cut, Paste & Paste Special</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p><b>Copy</b> duplicates data while keeping the original in place. <b>Cut</b> moves data, removing it from the original location. <b>Paste</b> places that data elsewhere. <b>Paste Special</b> lets you paste only specific parts (like values only, or formatting only) instead of everything.</p>
+
+      <h3 class="step-title">🛠️ How to Copy & Paste</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the cell(s) you want to copy.</li>
+          <li>Press <span class="shortcut">Ctrl + C</span> (or right-click → Copy).</li>
+          <li>Click the destination cell.</li>
+          <li>Press <span class="shortcut">Ctrl + V</span> (or right-click → Paste).</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to Cut & Paste (move data)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the cell(s).</li>
+          <li>Press <span class="shortcut">Ctrl + X</span> (or right-click → Cut).</li>
+          <li>Click the destination cell.</li>
+          <li>Press <span class="shortcut">Ctrl + V</span>. The data disappears from the original location.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to use Paste Special</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Copy the cell(s) first (<span class="shortcut">Ctrl + C</span>).</li>
+          <li>Right-click the destination cell → <b>Paste Special...</b> (or press <span class="shortcut">Ctrl + Alt + V</span>).</li>
+          <li>Choose an option:
+            <ul>
+              <li><b>Values</b> — pastes only the result, not the formula.</li>
+              <li><b>Formats</b> — pastes only formatting (colors, borders), not the data.</li>
+              <li><b>Formulas</b> — pastes only the formula.</li>
+              <li><b>Transpose</b> — flips rows into columns (or columns into rows).</li>
+            </ul>
+          </li>
+          <li>Click OK.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⏰ When to use Paste Special</h3>
+      <p>Use <b>Paste Values</b> when you copy a formula result and don't want the formula (and its cell references) to come along. Use <b>Transpose</b> when your data was entered in rows but you need it in columns, or vice versa.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Copying a cell with a formula and pasting it elsewhere — the formula's cell references shift automatically, which can give wrong results if not checked. Use Paste Values if you just want the number.</div>
+    </section>
+
+    <!-- T10 -->
+    <section class="topic" id="t10">
+      <h2 class="topic-title">T10 · AutoFill & Fill Handle</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p>The <b>Fill Handle</b> is the small square dot at the bottom-right corner of a selected cell. Dragging it lets Excel automatically continue a pattern — numbers, dates, days, or repeated text — into adjacent cells. This is called <b>AutoFill</b>.</p>
+
+      <h3 class="step-title">🛠️ How to use the Fill Handle</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the cell containing the starting value (e.g., type <code>EMP001</code> in a cell).</li>
+          <li>Hover your mouse over the small square at the bottom-right of the cell until the cursor becomes a thin black <b>+</b>.</li>
+          <li>Click and drag down (or across) as far as you need.</li>
+          <li>Release the mouse — Excel fills in the pattern automatically (EMP002, EMP003, EMP004...).</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to AutoFill a series from two starting values</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Type the first value in one cell (e.g., <code>2</code>) and the next value in the cell below (e.g., <code>4</code>).</li>
+          <li>Select both cells.</li>
+          <li>Drag the Fill Handle down — Excel detects the pattern (+2 each time) and continues it: 6, 8, 10...</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">📋 What AutoFill can detect automatically</h3>
+      <table>
+        <tr><th>Starting Value</th><th>AutoFill Result</th></tr>
+        <tr><td>Monday</td><td>Tuesday, Wednesday, Thursday...</td></tr>
+        <tr><td>Jan</td><td>Feb, Mar, Apr...</td></tr>
+        <tr><td>Qtr 1</td><td>Qtr 2, Qtr 3, Qtr 4...</td></tr>
+        <tr><td>2023-01-01</td><td>2023-01-02, 2023-01-03...</td></tr>
+        <tr><td>EMP001</td><td>EMP002, EMP003...</td></tr>
+      </table>
+
+      <h3 class="step-title">⏰ When to use this</h3>
+      <p>Use AutoFill whenever you need a repeating pattern — Employee IDs, Serial numbers, dates, or month names — instead of typing each one manually.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Dragging the Fill Handle on plain text expecting numbers to increase — a single cell with just "5" copied via Fill Handle repeats "5" everywhere unless you hold <span class="shortcut">Ctrl</span> while dragging (which forces it to increment).</div>
+    </section>
+
+    <!-- T11 -->
+    <section class="topic" id="t11">
+      <h2 class="topic-title">T11 · Flash Fill</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p><b>Flash Fill</b> is a smart Excel feature that detects a pattern from an example you type and automatically fills the rest of the column to match — useful for combining, splitting, or reformatting text without writing formulas.</p>
+
+      <h3 class="step-title">🛠️ How to use Flash Fill</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Make sure you have a source column next to an empty column (e.g., First Name and Last Name columns, with an empty "Full Name" column beside them).</li>
+          <li>In the first empty cell, manually type the result you want as an example (e.g., type <code>Rohit Sharma</code> combining First + Last Name).</li>
+          <li>Click the next cell down and start typing — Excel will show a greyed-out preview of the rest of the column following the same pattern.</li>
+          <li>Press <span class="shortcut">Enter</span> to accept, and the entire column fills automatically.</li>
+          <li>Alternative: after typing 1-2 examples, go to <b>Data tab → Flash Fill</b> (or press <span class="shortcut">Ctrl + E</span>).</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🌍 Real-world examples of Flash Fill</h3>
+      <div class="example-box">
+        <b>Combining:</b> First Name "Rohit" + Last Name "Sharma" → Flash Fill produces "Rohit Sharma" in the Full Name column.<br><br>
+        <b>Extracting:</b> From an email like "rohit.sharma@company.com", Flash Fill can extract just "rohit.sharma" or just the domain "company.com" once you show it one example.<br><br>
+        <b>Reformatting:</b> Converting "SHARMA, ROHIT" into "Rohit Sharma" (proper case, reordered).
+      </div>
+
+      <h3 class="step-title">⏰ When to use this</h3>
+      <p>Use Flash Fill for one-time quick text transformations. For something that needs to update automatically when source data changes, a formula (like CONCATENATE or TEXT functions, covered in a later module) is better since Flash Fill results are static text, not a live formula.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Expecting Flash Fill to update automatically if the source data changes later — it won't, because it pastes fixed text, not a formula. You'd need to redo Flash Fill.</div>
+    </section>
+
+    <!-- T12 -->
+    <section class="topic" id="t12">
+      <h2 class="topic-title">T12 · Find, Replace & Go To</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p><b>Find</b> searches for specific text/values in a sheet. <b>Replace</b> finds and swaps text with something else automatically. <b>Go To</b> jumps directly to a specific cell, range, or type of cell (like all blanks).</p>
+
+      <h3 class="step-title">🛠️ How to use Find</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Press <span class="shortcut">Ctrl + F</span>.</li>
+          <li>Type the text/number you're searching for in the box.</li>
+          <li>Click <b>Find Next</b> to jump to each matching cell one at a time, or <b>Find All</b> to list every match.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to use Find & Replace</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Press <span class="shortcut">Ctrl + H</span>.</li>
+          <li>In "Find what", type the text to search for (e.g., <code>Banglore</code>).</li>
+          <li>In "Replace with", type the correct text (e.g., <code>Bangalore</code>).</li>
+          <li>Click <b>Replace</b> to fix one at a time, or <b>Replace All</b> to fix every occurrence in the sheet at once.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to use Go To</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Press <span class="shortcut">Ctrl + G</span> (or F5).</li>
+          <li>Type a cell address (e.g., <code>H25</code>) and press Enter to jump there.</li>
+          <li>For advanced use, click <b>Special...</b> in the Go To box to select all Blanks, all Formulas, all Constants, etc. in one click.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⏰ When to use this</h3>
+      <p>Use Find & Replace to quickly fix a spelling mistake repeated across many rows (like a misspelled city name) instead of correcting each cell manually.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Using "Replace All" without checking matches first — it can accidentally replace text inside unrelated words. For example, replacing "IT" with "Information Technology" could also change "CredIT" if not careful. Use "Match entire cell contents" option in the Find & Replace dialog to avoid this.</div>
+    </section>
+
+    <!-- T13 -->
+    <section class="topic" id="t13">
+      <h2 class="topic-title">T13 · Sort & Filter</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p><b>Sort</b> rearranges rows in a chosen order (A-Z, Z-A, smallest-largest, oldest-newest). <b>Filter</b> temporarily hides rows that don't match a condition you set, without deleting any data.</p>
+
+      <h3 class="step-title">🛠️ How to Sort data</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click any cell inside your data range.</li>
+          <li>Go to <b>Data tab → Sort</b> (or for a quick single-column sort, use the A→Z / Z→A buttons).</li>
+          <li>In the Sort dialog, choose the column to sort by (e.g., "Salary").</li>
+          <li>Choose order: Smallest to Largest, or Largest to Smallest.</li>
+          <li>Click <b>Add Level</b> to sort by a second column too (e.g., sort by Department, then by Salary within each department).</li>
+          <li>Click OK.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to apply Filter</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click any cell inside your data range.</li>
+          <li>Go to <b>Data tab → Filter</b> (or press <span class="shortcut">Ctrl + Shift + L</span>).</li>
+          <li>Small dropdown arrows appear on each header cell.</li>
+          <li>Click the dropdown arrow on a column (e.g., "Department") → untick "Select All" → tick only the values you want (e.g., only "IT") → click OK.</li>
+          <li>Only matching rows will now be visible; others are hidden (not deleted).</li>
+          <li>To remove the filter, click the same dropdown → "Clear Filter", or click Data → Filter again to turn it off completely.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⏰ When to use Sort vs Filter</h3>
+      <p>Use <b>Sort</b> when you want to reorder all your data (e.g., see employees from highest to lowest salary). Use <b>Filter</b> when you only want to temporarily view a subset (e.g., only Sales department employees) while keeping the rest of the data safe underneath.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Selecting only one column before sorting — this can shuffle that column's data out of sync with the rest of the row. Always click inside the full data range (or select the entire range) so Excel sorts whole rows together.</div>
+    </section>
+
+    <!-- T14 -->
+    <section class="topic" id="t14">
+      <h2 class="topic-title">T14 · Freeze Panes, Split & Hide/Unhide</h2>
+
+      <h3 class="step-title">📌 What is it?</h3>
+      <p><b>Freeze Panes</b> locks certain rows/columns in place so they stay visible while scrolling. <b>Split</b> divides the window into separate scrollable sections. <b>Hide/Unhide</b> temporarily conceals rows or columns without deleting them.</p>
+
+      <h3 class="step-title">🛠️ How to Freeze the top row (headers)</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Go to <b>View tab → Freeze Panes → Freeze Top Row</b>.</li>
+          <li>Now when you scroll down, the header row stays fixed at the top.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to Freeze a specific row/column combination</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click the cell just below and to the right of what you want frozen (e.g., click B2 to freeze row 1 and column A together).</li>
+          <li>Go to <b>View tab → Freeze Panes → Freeze Panes</b>.</li>
+          <li>Everything above and to the left of your click stays visible while scrolling.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to use Split</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Click a cell where you want the split to happen.</li>
+          <li>Go to <b>View tab → Split</b>.</li>
+          <li>The window divides into panes that can be scrolled independently — useful for comparing distant parts of a large sheet.</li>
+          <li>Click Split again to remove it.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">🛠️ How to Hide/Unhide rows or columns</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Select the row number(s) or column letter(s) you want to hide.</li>
+          <li>Right-click → <b>Hide</b>.</li>
+          <li>To unhide: select the rows/columns just before and after the hidden ones → right-click → <b>Unhide</b>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⏰ When to use these</h3>
+      <p>Use Freeze Panes on large datasets so column headers stay visible while you scroll through hundreds of rows. Use Hide when a column has sensitive or temporarily unnecessary data (like internal notes) that you don't want visible but still need to keep.</p>
+
+      <h3 class="step-title">⚠️ Common mistakes</h3>
+      <div class="mistake-box"><b>Mistake:</b> Forgetting where a column was hidden and thinking data is lost — hidden columns still exist. Select the surrounding columns and use Unhide, or select all (Ctrl+A) then Unhide to reveal everything.</div>
+    </section>
+
+    <!-- T15 -->
+    <section class="topic" id="t15">
+      <h2 class="topic-title">T15 · Practical Exercise — Employee Database</h2>
+
+      <h3 class="step-title">📌 Goal</h3>
+      <p>Apply everything from T9–T14 on a real dataset: AutoFill, Flash Fill, Find & Replace, Sort, Filter, and Freeze Panes.</p>
+
+      <div class="dataset-note">
+        <b>Dataset provided:</b> <code>Employee_Database_Dataset.xlsx</code> — 20 employees with Emp ID (only first 2 filled), First Name, Last Name, Full Name (empty), Department, City (contains a repeated misspelling "Banglore"), Date of Joining, Salary, and Email ID (empty). Built specifically so each blank/error gives you something to practice.
+      </div>
+
+      <h3 class="step-title">🛠️ Step-by-step exercise instructions</h3>
+      <div class="steps-box">
+        <ol>
+          <li>Open <code>Employee_Database_Dataset.xlsx</code>.</li>
+          <li><b>AutoFill practice:</b> Select cells A2:A3 (EMP001, EMP002), then drag the Fill Handle down to A21 to auto-generate EMP003 through EMP020.</li>
+          <li><b>Flash Fill practice:</b> In the "Full Name" column (D), type <code>Rohit Sharma</code> in D2 (combining First + Last Name), press Enter, click D3 and press <span class="shortcut">Ctrl + E</span> to Flash Fill the rest.</li>
+          <li><b>Flash Fill practice #2:</b> In the "Email ID" column (I), type <code>rohit.sharma@company.com</code> in I2 (lowercase first.last@company.com pattern), then use Flash Fill (<span class="shortcut">Ctrl + E</span>) to generate the rest automatically.</li>
+          <li><b>Find & Replace practice:</b> Press <span class="shortcut">Ctrl + H</span>, find "Banglore" and replace all with "Bangalore".</li>
+          <li><b>Sort practice:</b> Select the data range → Data tab → Sort → sort by "Department" (A-Z), then add a second level sorting by "Salary" (Largest to Smallest).</li>
+          <li><b>Filter practice:</b> Apply Filter (<span class="shortcut">Ctrl + Shift + L</span>) → filter the Department column to show only "IT" employees. Note how many appear, then clear the filter.</li>
+          <li><b>Freeze Panes practice:</b> View tab → Freeze Panes → Freeze Top Row, then scroll down to confirm headers stay visible.</li>
+          <li><b>Copy/Paste Special practice:</b> Copy the "Salary" column, paste it into a blank column using Paste Special → Values Only, to see the difference from a normal paste.</li>
+          <li>Save the file using <span class="shortcut">Ctrl + S</span>.</li>
+        </ol>
+      </div>
+
+      <h3 class="step-title">⚠️ Common mistakes to avoid during the exercise</h3>
+      <div class="mistake-box"><b>Mistake:</b> Forgetting to press Enter after typing the Flash Fill example before pressing Ctrl+E on the next cell — Flash Fill needs at least one confirmed example to detect the pattern.</div>
+      <div class="mistake-box"><b>Mistake:</b> Sorting only the Department column without including the whole row — always select/click within the full data range so related row data doesn't get separated.</div>
+
+      <h3 class="step-title">🌍 Real-world example</h3>
+      <div class="example-box">HR teams use exactly this kind of workflow: AutoFill for Employee IDs, Flash Fill to quickly generate company email addresses from names, Find & Replace to fix inconsistent city/department spellings, and Filter to instantly view "all employees in a department" during audits or reports.</div>
+    </section>
+
+    <!-- QUICK REVISION -->
+    <section class="quick-revision" id="quickrevision">
+      <h2>⚡ Quick Revision — Module 2</h2>
+      <ul>
+        <li><b>Copy</b> (Ctrl+C) keeps the original; <b>Cut</b> (Ctrl+X) removes it from source. <b>Paste Special</b> (Ctrl+Alt+V) lets you paste only Values, Formats, Formulas, or Transpose.</li>
+        <li><b>Fill Handle</b> = small square at bottom-right of a cell; drag it to AutoFill patterns like numbers, dates, days, or IDs.</li>
+        <li><b>Flash Fill</b> (Ctrl+E) learns from one typed example to auto-complete a column — great for combining/splitting text, but result is static (not a live formula).</li>
+        <li><b>Find</b> (Ctrl+F) locates text; <b>Replace</b> (Ctrl+H) swaps it everywhere; <b>Go To</b> (Ctrl+G) jumps to a specific cell or selects special cell types.</li>
+        <li><b>Sort</b> reorders all rows by a column's values. <b>Filter</b> (Ctrl+Shift+L) temporarily hides non-matching rows without deleting anything.</li>
+        <li><b>Freeze Panes</b> keeps headers visible while scrolling. <b>Split</b> creates independently scrollable sections. <b>Hide/Unhide</b> conceals rows/columns without deleting them.</li>
+        <li>Always select/click within the <i>full</i> data range before Sort/Filter so rows stay correctly matched.</li>
+      </ul>
+    </section>
+
+  </div>
+</div>
+</body>
+</html>

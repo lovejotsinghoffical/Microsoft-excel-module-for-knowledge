@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4: Logical Functions — Excel Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1117;
+    --bg-alt:#161923;
+    --panel:#1b1f2b;
+    --panel-2:#20242f;
+    --border:#2b3040;
+    --text:#e6e8ef;
+    --text-dim:#a6acbd;
+    --accent:#7c9cff;
+    --accent-2:#5eead4;
+    --accent-3:#f5a623;
+    --danger:#ff6b6b;
+    --good:#4ade80;
+    --code-bg:#11141c;
+    --shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.65;
+    font-size:16px;
+  }
+  h1,h2,h3,h4{font-family:'Sora',sans-serif;color:#fff;letter-spacing:-0.01em;}
+  .layout{display:flex;max-width:1400px;margin:0 auto;}
+  nav.sidebar{
+    width:270px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--bg-alt);
+    border-right:1px solid var(--border);
+    padding:24px 18px;
+    flex-shrink:0;
+  }
+  nav.sidebar h2{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--accent-2);
+    margin:22px 0 8px;
+  }
+  nav.sidebar h2:first-child{margin-top:0;}
+  nav.sidebar a{
+    display:block;
+    color:var(--text-dim);
+    text-decoration:none;
+    font-size:14px;
+    padding:7px 10px;
+    border-radius:8px;
+    margin-bottom:2px;
+    transition:.15s;
+    border-left:2px solid transparent;
+  }
+  nav.sidebar a:hover{background:var(--panel);color:var(--text);}
+  nav.sidebar a.active{color:var(--accent);background:var(--panel);border-left:2px solid var(--accent);}
+  main{flex:1;padding:40px 56px 100px;max-width:920px;}
+  .title-block{margin-bottom:36px;}
+  .title-block .eyebrow{
+    color:var(--accent-3);
+    font-weight:600;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+  }
+  .title-block h1{font-size:34px;margin:8px 0 6px;}
+  .title-block p{color:var(--text-dim);font-size:15.5px;margin:0;}
+  section{margin-bottom:56px;scroll-margin-top:20px;}
+  section h2{
+    font-size:24px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:12px;
+    margin-bottom:18px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .tcode{
+    font-family:'JetBrains Mono',monospace;
+    background:var(--accent);
+    color:#0f1117;
+    font-size:12.5px;
+    font-weight:700;
+    padding:3px 9px;
+    border-radius:6px;
+  }
+  section h3{font-size:18px;color:var(--accent-2);margin-top:28px;}
+  p{color:#d3d6e0;}
+  code{
+    font-family:'JetBrains Mono',monospace;
+    background:var(--code-bg);
+    color:var(--accent-2);
+    padding:2px 6px;
+    border-radius:5px;
+    font-size:.9em;
+    border:1px solid var(--border);
+  }
+  pre{
+    background:var(--code-bg);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:18px 20px;
+    overflow-x:auto;
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+    line-height:1.6;
+    margin:14px 0;
+    box-shadow:var(--shadow);
+  }
+  pre code{background:none;border:none;padding:0;color:#e6e8ef;}
+  .fn{color:#7c9cff;font-weight:600;}
+  .str{color:#f5a623;}
+  .num{color:#5eead4;}
+  .cellref{color:#c792ea;}
+  .comment{color:#6b7280;font-style:italic;}
+  .callout{
+    border-radius:10px;
+    padding:16px 20px;
+    margin:18px 0;
+    border:1px solid var(--border);
+    display:flex;
+    gap:12px;
+  }
+  .callout .icon{font-size:20px;line-height:1;}
+  .callout.tip{background:rgba(94,234,212,0.07);border-color:rgba(94,234,212,0.3);}
+  .callout.warn{background:rgba(255,107,107,0.07);border-color:rgba(255,107,107,0.3);}
+  .callout.note{background:rgba(124,156,255,0.07);border-color:rgba(124,156,255,0.3);}
+  .callout strong{color:#fff;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:16px 0;
+    font-size:14.5px;
+    background:var(--panel);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  th{
+    background:var(--panel-2);
+    color:var(--accent-2);
+    text-align:left;
+    padding:10px 14px;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  td{padding:10px 14px;border-top:1px solid var(--border);color:#d3d6e0;}
+  tr:hover td{background:rgba(255,255,255,0.02);}
+  .badge{
+    display:inline-block;
+    font-size:11.5px;
+    font-weight:700;
+    padding:2px 9px;
+    border-radius:999px;
+    margin-left:8px;
+  }
+  .badge.easy{background:rgba(74,222,128,.15);color:var(--good);}
+  .badge.med{background:rgba(245,166,35,.15);color:var(--accent-3);}
+  .badge.hard{background:rgba(255,107,107,.15);color:var(--danger);}
+  .practice{
+    background:var(--panel);
+    border:1px dashed var(--border);
+    border-radius:10px;
+    padding:16px 20px;
+    margin-top:14px;
+  }
+  .practice h4{margin:0 0 8px;color:var(--accent-3);font-size:14.5px;text-transform:uppercase;letter-spacing:.06em;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:900px){.grid2{grid-template-columns:1fr;}}
+  .dataset-box{
+    background:linear-gradient(135deg, rgba(124,156,255,.12), rgba(94,234,212,.08));
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px 26px;
+    margin-bottom:40px;
+  }
+  .dataset-box h3{margin-top:0;color:#fff;}
+  .dataset-box code{background:rgba(0,0,0,.25);}
+  footer{
+    text-align:center;
+    padding:30px;
+    color:var(--text-dim);
+    font-size:13px;
+    border-top:1px solid var(--border);
+  }
+  @media print{
+    nav.sidebar{display:none;}
+    body{background:#fff;color:#000;}
+    main{padding:0;max-width:100%;}
+    pre, table, .callout, .dataset-box{box-shadow:none;}
+    section{page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="sidebar">
+  <h2>Module 4</h2>
+  <a href="#intro">Overview & Dataset</a>
+  <a href="#t25">T25 · IF()</a>
+  <a href="#t26">T26 · Nested IF()</a>
+  <a href="#t27">T27 · AND/OR/NOT()</a>
+  <a href="#t28">T28 · SUMIF & COUNTIF</a>
+  <a href="#t29">T29 · IFERROR()</a>
+  <a href="#t30">T30 · Practical: Salary Sheet</a>
+  <a href="#t31">T31 · Test 4 Prep</a>
+  <h2>Reference</h2>
+  <a href="#cheatsheet">Function Cheat Sheet</a>
+  <a href="#common-errors">Common Errors</a>
+</nav>
+
+<main>
+  <div class="title-block">
+    <div class="eyebrow">Excel · Module 4</div>
+    <h1>Logical Functions</h1>
+    <p>IF, Nested IF, AND/OR/NOT, SUMIF/COUNTIF, IFERROR — all practised on one Salary Sheet dataset.</p>
+  </div>
+
+  <div class="dataset-box" id="intro">
+    <h3>📊 The Practice Dataset</h3>
+    <p>Every example below refers to <strong>Module4_Salary_Dataset.xlsx</strong>, which has 4 sheets:</p>
+    <table>
+      <tr><th>Sheet</th><th>Contents</th></tr>
+      <tr><td><code>Salary_Data</code></td><td>30 employees — EmpID, Name, Department, DeptCode, Basic Salary, Days Present, Performance Rating (1–5), Years of Experience, plus <strong>blank</strong> columns: Bonus %, Bonus Amount, Gross Salary, Increment Eligible, Grade, Attendance Status</td></tr>
+      <tr><td><code>Lookup_Grade</code></td><td>Rating (1–5) → Grade (D, C, B, A, A+) — used with VLOOKUP for the Grade column</td></tr>
+      <tr><td><code>Dept_Codes</code></td><td>DeptCode → Full Department Name, HRA %, Travel Allowance. Two employees (rows 7 & 19) have deliberately mismatched codes — this is intentional, for IFERROR practice</td></tr>
+      <tr><td><code>Read_Me_First</code></td><td>Suggested exercise for every topic, mapped 1:1 to T25–T31</td></tr>
+    </table>
+    <p style="margin-bottom:0;">Open the workbook alongside these notes and build each formula in the blank columns as you go.</p>
+  </div>
+
+  <section id="t25">
+    <h2><span class="tcode">T25</span> IF()</h2>
+    <p>The <span class="fn">IF()</span> function tests a condition and returns one value if it's TRUE, another if it's FALSE. It's the foundation every other logical function builds on.</p>
+    <pre><code><span class="fn">=IF</span>(logical_test, value_if_true, value_if_false)</code></pre>
+
+    <h3>Applied to the dataset — Attendance Status</h3>
+    <p>In <code>Salary_Data</code>, column <strong>N (Attendance Status)</strong> is blank. Mark an employee "Present" if <code>Days Present</code> (column F) is 24 or more, otherwise "Irregular".</p>
+    <pre><code><span class="fn">=IF</span>(F2>=<span class="num">24</span>,<span class="str">"Present"</span>,<span class="str">"Irregular"</span>)</code></pre>
+    <p>Fill this down from N2 to N31 (30 employees).</p>
+
+    <div class="callout tip">
+      <div class="icon">💡</div>
+      <div><strong>Tip:</strong> IF() always returns exactly one of two outcomes. The moment you need a third outcome, you need <em>nested</em> IF — that's T26.</div>
+    </div>
+
+    <div class="practice">
+      <h4>Try it yourself <span class="badge easy">Easy</span></h4>
+      <p>In a spare column, write a formula that marks "Senior" if Years of Experience (H) is 5 or more, else "Junior".</p>
+    </div>
+  </section>
+
+  <section id="t26">
+    <h2><span class="tcode">T26</span> Nested IF()</h2>
+    <p>When there are more than two possible outcomes, IF() functions are nested inside each other. Excel evaluates top to bottom and stops at the first TRUE condition.</p>
+    <pre><code><span class="fn">=IF</span>(cond1, result1,
+  <span class="fn">IF</span>(cond2, result2,
+    <span class="fn">IF</span>(cond3, result3, result_default)))</code></pre>
+
+    <h3>Applied to the dataset — Bonus %</h3>
+    <p>Column <strong>I (Bonus %)</strong> should assign a bonus percentage based on <code>Performance Rating</code> (column G):</p>
+    <table>
+      <tr><th>Rating</th><th>Bonus %</th></tr>
+      <tr><td>5</td><td>10%</td></tr>
+      <tr><td>4</td><td>7%</td></tr>
+      <tr><td>3</td><td>4%</td></tr>
+      <tr><td>1–2</td><td>0%</td></tr>
+    </table>
+    <pre><code><span class="fn">=IF</span>(G2=<span class="num">5</span>,<span class="num">10</span>%,
+  <span class="fn">IF</span>(G2=<span class="num">4</span>,<span class="num">7</span>%,
+    <span class="fn">IF</span>(G2=<span class="num">3</span>,<span class="num">4</span>%,<span class="num">0</span>%)))</code></pre>
+
+    <div class="callout warn">
+      <div class="icon">⚠️</div>
+      <div><strong>Common mistake:</strong> forgetting a closing bracket for each nested IF. 3 nested IFs need 3 closing <code>)</code> at the end — count them before pressing Enter.</div>
+    </div>
+
+    <h3>Cleaner alternative — IFS()</h3>
+    <p>If your Excel version supports it (365 / 2019+), <span class="fn">IFS()</span> avoids the bracket-counting problem entirely:</p>
+    <pre><code><span class="fn">=IFS</span>(G2=<span class="num">5</span>,<span class="num">10</span>%, G2=<span class="num">4</span>,<span class="num">7</span>%, G2=<span class="num">3</span>,<span class="num">4</span>%, <span class="fn">TRUE</span>,<span class="num">0</span>%)</code></pre>
+
+    <div class="practice">
+      <h4>Try it yourself <span class="badge med">Medium</span></h4>
+      <p>Compute Bonus Amount in column J as <code>Basic Salary × Bonus %</code>, then Gross Salary in column K as <code>Basic Salary + Bonus Amount</code>.</p>
+    </div>
+  </section>
+
+  <section id="t27">
+    <h2><span class="tcode">T27</span> AND(), OR(), NOT()</h2>
+    <p>These combine multiple conditions into a single TRUE/FALSE, which then feeds into IF().</p>
+    <div class="grid2">
+      <div>
+        <h3 style="margin-top:0;">AND()</h3>
+        <p>TRUE only if <em>every</em> condition is TRUE.</p>
+        <pre><code><span class="fn">=AND</span>(cond1, cond2, ...)</code></pre>
+      </div>
+      <div>
+        <h3 style="margin-top:0;">OR()</h3>
+        <p>TRUE if <em>at least one</em> condition is TRUE.</p>
+        <pre><code><span class="fn">=OR</span>(cond1, cond2, ...)</code></pre>
+      </div>
+    </div>
+    <h3>NOT()</h3>
+    <p>Reverses a TRUE/FALSE result.</p>
+    <pre><code><span class="fn">=NOT</span>(condition)</code></pre>
+
+    <h3>Applied to the dataset — Increment Eligible</h3>
+    <p>Column <strong>L (Increment Eligible)</strong>: mark "YES" if <em>(Rating ≥ 4 AND Days Present ≥ 24)</em> <strong>OR</strong> Years of Experience ≥ 10.</p>
+    <pre><code><span class="fn">=IF</span>(<span class="fn">OR</span>(<span class="fn">AND</span>(G2>=<span class="num">4</span>,F2>=<span class="num">24</span>), H2>=<span class="num">10</span>),
+   <span class="str">"YES"</span>,<span class="str">"NO"</span>)</code></pre>
+
+    <p>A NOT() example — flag anyone who is <em>not</em> a Sales employee:</p>
+    <pre><code><span class="fn">=IF</span>(<span class="fn">NOT</span>(C2=<span class="str">"Sales"</span>),<span class="str">"Non-Sales"</span>,<span class="str">"Sales"</span>)</code></pre>
+
+    <div class="callout note">
+      <div class="icon">📝</div>
+      <div><strong>Remember:</strong> AND/OR/NOT return TRUE or FALSE on their own — they only become "IF X do this" logic once wrapped inside an IF().</div>
+    </div>
+
+    <div class="practice">
+      <h4>Try it yourself <span class="badge med">Medium</span></h4>
+      <p>Flag employees "At Risk" if Days Present &lt; 20 AND Rating &lt;= 2.</p>
+    </div>
+  </section>
+
+  <section id="t28">
+    <h2><span class="tcode">T28</span> SUMIF() & COUNTIF()</h2>
+    <p>These aggregate data based on a condition — the bridge between logical tests and summary reporting.</p>
+    <pre><code><span class="fn">=SUMIF</span>(range, criteria, sum_range)
+<span class="fn">=COUNTIF</span>(range, criteria)</code></pre>
+
+    <h3>Applied to the dataset — Department Summary</h3>
+    <p>Below row 31 in <code>Salary_Data</code>, build a small summary table:</p>
+    <pre><code><span class="comment">// Total Basic Salary for Sales department</span>
+<span class="fn">=SUMIF</span>(C2:C31,<span class="str">"Sales"</span>,D2:D31)
+
+<span class="comment">// Number of employees in IT</span>
+<span class="fn">=COUNTIF</span>(C2:C31,<span class="str">"IT"</span>)</code></pre>
+    <p>Repeat for each department: Sales, IT, HR, Finance, Marketing.</p>
+
+    <table>
+      <tr><th>Department</th><th>Formula (Total Salary)</th><th>Formula (Headcount)</th></tr>
+      <tr><td>Sales</td><td><code>=SUMIF(C:C,"Sales",D:D)</code></td><td><code>=COUNTIF(C:C,"Sales")</code></td></tr>
+      <tr><td>IT</td><td><code>=SUMIF(C:C,"IT",D:D)</code></td><td><code>=COUNTIF(C:C,"IT")</code></td></tr>
+      <tr><td>HR</td><td><code>=SUMIF(C:C,"HR",D:D)</code></td><td><code>=COUNTIF(C:C,"HR")</code></td></tr>
+    </table>
+
+    <h3>Bonus: SUMIFS / COUNTIFS (multiple conditions)</h3>
+    <p>Total Basic Salary for employees who are in Sales <em>and</em> have Rating ≥ 4:</p>
+    <pre><code><span class="fn">=SUMIFS</span>(D2:D31, C2:C31,<span class="str">"Sales"</span>, G2:G31,<span class="str">">=4"</span>)</code></pre>
+
+    <div class="callout tip">
+      <div class="icon">💡</div>
+      <div><strong>Tip:</strong> Criteria with comparison operators must be text strings: <code>">=24"</code>, not <code>>=24</code>.</div>
+    </div>
+
+    <div class="practice">
+      <h4>Try it yourself <span class="badge easy">Easy</span></h4>
+      <p>Count how many employees have Days Present &lt; 20 across the whole company (attendance concern count).</p>
+    </div>
+  </section>
+
+  <section id="t29">
+    <h2><span class="tcode">T29</span> IFERROR()</h2>
+    <p><span class="fn">IFERROR()</span> catches any error a formula produces (<code>#N/A</code>, <code>#DIV/0!</code>, <code>#VALUE!</code>, etc.) and replaces it with something meaningful.</p>
+    <pre><code><span class="fn">=IFERROR</span>(value, value_if_error)</code></pre>
+
+    <h3>Applied to the dataset — Grade lookup</h3>
+    <p>Column <strong>M (Grade)</strong>: use VLOOKUP against <code>Lookup_Grade</code> to convert Performance Rating into a Grade:</p>
+    <pre><code><span class="fn">=IFERROR</span>(
+  <span class="fn">VLOOKUP</span>(G2, Lookup_Grade!<span class="cellref">A:B</span>, <span class="num">2</span>, <span class="fn">FALSE</span>),
+  <span class="str">"Check Rating"</span>
+)</code></pre>
+
+    <h3>Where this dataset makes IFERROR() essential</h3>
+    <p>Try a VLOOKUP of <code>DeptCode</code> (column D) against <code>Dept_Codes</code> to pull the Full Department Name:</p>
+    <pre><code><span class="fn">=IFERROR</span>(
+  <span class="fn">VLOOKUP</span>(D2, Dept_Codes!<span class="cellref">A:B</span>, <span class="num">2</span>, <span class="fn">FALSE</span>),
+  <span class="str">"Code Not Found"</span>
+)</code></pre>
+    <p>Rows 7 and 19 have deliberately mismatched DeptCodes that don't exist in <code>Dept_Codes</code> — without IFERROR() these would show <code>#N/A</code>. With it, they'll clearly display "Code Not Found" instead, which is exactly what happens in real payroll sheets with data-entry typos.</p>
+
+    <div class="callout warn">
+      <div class="icon">⚠️</div>
+      <div><strong>Don't overuse IFERROR:</strong> wrapping every formula in IFERROR() can hide genuine mistakes (like a wrong cell reference). Use it to handle <em>expected</em> exceptions — like missing lookup matches — not to silence bugs.</div>
+    </div>
+
+    <div class="practice">
+      <h4>Try it yourself <span class="badge hard">Hard</span></h4>
+      <p>Pull HRA % from <code>Dept_Codes</code> for every employee, wrapped in IFERROR with fallback text "No HRA Data".</p>
+    </div>
+  </section>
+
+  <section id="t30">
+    <h2><span class="tcode">T30</span> Practical — Salary Sheet</h2>
+    <p>Now combine everything into one working Salary Sheet using <code>Salary_Data</code>. Build these columns in order:</p>
+    <table>
+      <tr><th>Column</th><th>Formula logic</th><th>Function(s) used</th></tr>
+      <tr><td>N — Attendance Status</td><td>"Present" if Days Present ≥ 24, else "Irregular"</td><td>IF</td>
+      </tr>
+      <tr><td>I — Bonus %</td><td>10/7/4/0% by Rating tier</td><td>Nested IF</td></tr>
+      <tr><td>J — Bonus Amount</td><td>Basic Salary × Bonus %</td><td>Arithmetic</td></tr>
+      <tr><td>K — Gross Salary</td><td>Basic Salary + Bonus Amount</td><td>Arithmetic</td></tr>
+      <tr><td>L — Increment Eligible</td><td>(Rating≥4 AND Days≥24) OR Exp≥10</td><td>AND, OR, IF</td></tr>
+      <tr><td>M — Grade</td><td>VLOOKUP Rating → Grade, with fallback</td><td>VLOOKUP, IFERROR</td></tr>
+      <tr><td>Summary block</td><td>Total salary & headcount per department</td><td>SUMIF, COUNTIF</td></tr>
+    </table>
+
+    <h3>Full worked example (row 2)</h3>
+    <pre><code><span class="comment">// N2 — Attendance Status</span>
+<span class="fn">=IF</span>(F2>=<span class="num">24</span>,<span class="str">"Present"</span>,<span class="str">"Irregular"</span>)
+
+<span class="comment">// I2 — Bonus %</span>
+<span class="fn">=IF</span>(G2=<span class="num">5</span>,<span class="num">10</span>%,<span class="fn">IF</span>(G2=<span class="num">4</span>,<span class="num">7</span>%,<span class="fn">IF</span>(G2=<span class="num">3</span>,<span class="num">4</span>%,<span class="num">0</span>%)))
+
+<span class="comment">// J2 — Bonus Amount</span>
+<span class="cellref">=D2*I2</span>
+
+<span class="comment">// K2 — Gross Salary</span>
+<span class="cellref">=D2+J2</span>
+
+<span class="comment">// L2 — Increment Eligible</span>
+<span class="fn">=IF</span>(<span class="fn">OR</span>(<span class="fn">AND</span>(G2>=<span class="num">4</span>,F2>=<span class="num">24</span>),H2>=<span class="num">10</span>),<span class="str">"YES"</span>,<span class="str">"NO"</span>)
+
+<span class="comment">// M2 — Grade</span>
+<span class="fn">=IFERROR</span>(<span class="fn">VLOOKUP</span>(G2,Lookup_Grade!<span class="cellref">A:B</span>,<span class="num">2</span>,<span class="fn">FALSE</span>),<span class="str">"Check Rating"</span>)</code></pre>
+    <p>Fill each formula down through row 31, then build the department summary block from T28 beneath it.</p>
+
+    <div class="callout tip">
+      <div class="icon">✅</div>
+      <div><strong>Sanity check before moving on:</strong> Gross Salary should always be ≥ Basic Salary; Grade should never show blank or an error for any of the 30 rows.</div>
+    </div>
+  </section>
+
+  <section id="t31">
+    <h2><span class="tcode">T31</span> Test 4 — Prep Checklist</h2>
+    <p>Before attempting the test, make sure you can do each of these from memory, without looking at your notes:</p>
+    <table>
+      <tr><th>#</th><th>Can you...</th></tr>
+      <tr><td>1</td><td>Write a single IF() with a text result on both branches</td></tr>
+      <tr><td>2</td><td>Nest 3 IFs correctly, closing every bracket</td></tr>
+      <tr><td>3</td><td>Explain the difference between AND() and OR() in one sentence each</td></tr>
+      <tr><td>4</td><td>Write SUMIF and COUNTIF with a text criteria in quotes</td></tr>
+      <tr><td>5</td><td>Write SUMIFS with two conditions</td></tr>
+      <tr><td>6</td><td>Wrap a VLOOKUP in IFERROR with a sensible fallback message</td></tr>
+      <tr><td>7</td><td>Identify which error IFERROR is catching in a given broken formula</td></tr>
+    </table>
+    <div class="callout note">
+      <div class="icon">🎯</div>
+      <div>Re-do the T30 Salary Sheet from a blank copy of <code>Salary_Data</code> without referring back to these notes — that's the best rehearsal for the test.</div>
+    </div>
+  </section>
+
+  <section id="cheatsheet">
+    <h2>📋 Function Cheat Sheet</h2>
+    <table>
+      <tr><th>Function</th><th>Syntax</th><th>Use case</th></tr>
+      <tr><td>IF</td><td><code>=IF(test, true_val, false_val)</code></td><td>Two-way decision</td></tr>
+      <tr><td>Nested IF</td><td><code>=IF(c1,r1,IF(c2,r2,r3))</code></td><td>3+ way decision / tiers</td></tr>
+      <tr><td>AND</td><td><code>=AND(c1,c2,...)</code></td><td>All conditions must hold</td></tr>
+      <tr><td>OR</td><td><code>=OR(c1,c2,...)</code></td><td>Any one condition holds</td></tr>
+      <tr><td>NOT</td><td><code>=NOT(condition)</code></td><td>Reverse a TRUE/FALSE</td></tr>
+      <tr><td>SUMIF</td><td><code>=SUMIF(range,criteria,sum_range)</code></td><td>Conditional total</td></tr>
+      <tr><td>COUNTIF</td><td><code>=COUNTIF(range,criteria)</code></td><td>Conditional count</td></tr>
+      <tr><td>SUMIFS</td><td><code>=SUMIFS(sum_range,r1,c1,r2,c2)</code></td><td>Conditional total, multiple conditions</td></tr>
+      <tr><td>IFERROR</td><td><code>=IFERROR(value,fallback)</code></td><td>Catch and replace any error</td></tr>
+    </table>
+  </section>
+
+  <section id="common-errors">
+    <h2>🚫 Common Errors & Fixes</h2>
+    <table>
+      <tr><th>Error</th><th>Typical cause</th><th>Fix</th></tr>
+      <tr><td><code>#N/A</code></td><td>VLOOKUP found no match (e.g. mismatched DeptCode)</td><td>Wrap in IFERROR(), or fix the lookup value</td></tr>
+      <tr><td><code>#VALUE!</code></td><td>Comparing text to a number, or a criteria written without quotes</td><td>Check data types; wrap criteria in <code>"..."</code></td></tr>
+      <tr><td>Wrong bracket count</td><td>Missing a closing <code>)</code> in nested IF</td><td>Count nesting levels = count of closing brackets</td></tr>
+      <tr><td>SUMIF returns 0</td><td>Criteria text doesn't exactly match cell text (extra space, wrong case sensitivity of spelling)</td><td>Check spelling/spacing in the Department column</td></tr>
+    </table>
+  </section>
+
+  <footer>Module 4 · Logical Functions — Excel Course Notes · Practice dataset: Module4_Salary_Dataset.xlsx</footer>
+</main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.sidebar a');
+  const sections = document.querySelectorAll('main section');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 120) current = sec.getAttribute('id');
+    });
+    links.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
